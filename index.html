@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1d4ed8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Plan Mazda CX-30</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            /* ── Paleta Principal ── */
+            --primary:       #1d4ed8;
+            --primary-light: #3b82f6;
+            --primary-dark:  #1e3a8a;
+            --primary-faint: #eff6ff;
+            --navy:          #0c1445;
+            --gold:          #d97706;
+            --gold-light:    #f59e0b;
+            --gold-faint:    #fffbeb;
+
+            /* Aliases para compatibilidad con código existente */
+            --red:           #1d4ed8;
+            --red-light:     #3b82f6;
+            --red-faint:     #eff6ff;
+
+            /* ── Cuentas ── */
+            --nu:        #7c3aed;   /* Violet – Nu */
+            --nu-faint:  #f5f3ff;
+            --rev:       #1d4ed8;   /* Blue – Revolut */
+            --rev-faint: #eff6ff;
+            --ob:        #0284c7;   /* Sky – Openbank */
+            --ob-faint:  #e0f2fe;
+            --gbm:       #db2777;   /* Pink – GBM+ */
+            --gbm-faint: #fdf2f8;
+
+            /* ── Semánticos ── */
+            --green:       #059669;
+            --green-faint: #ecfdf5;
+
+            /* ── UI ── */
+            --bg:     #eef2ff;
+            --card:   #ffffff;
+            --text:   #0f172a;
+            --muted:  #64748b;
+            --border: #e2e8f0;
+            --tab-h:  64px;
+
+            /* ── Sombras ── */
+            --shadow-card:   0 4px 24px rgba(29,78,216,0.09), 0 1px 4px rgba(0,0,0,0.04);
+            --shadow-chip:   0 2px 12px rgba(29,78,216,0.10);
+            --shadow-btn:    0 4px 16px rgba(29,78,216,0.32);
+            --shadow-header: 0 4px 28px rgba(12,20,69,0.38);
+        }
+
+        body.dark {
+            --bg:            #0f172a;
+            --card:          #1e293b;
+            --text:          #e2e8f0;
+            --muted:         #94a3b8;
+            --border:        #334155;
+            --primary-faint: #1e3a8a;
+            --red-faint:     #1e3a8a;
+            --nu-faint:      #2e1065;
+            --rev-faint:     #1e3a8a;
+            --ob-faint:      #0c4a6e;
+            --gbm-faint:     #500724;
+            --green-faint:   #064e3b;
+            --gold-faint:    #451a03;
+            --shadow-card:   0 4px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
+            color-scheme: dark;
+        }
+        body.dark .tab-bar {
+            background: rgba(15,23,42,0.97);
+            border-top-color: rgba(255,255,255,0.05);
+        }
+        body.dark .app-header {
+            background: linear-gradient(135deg, #020817 0%, #060d2e 50%, #1e3a8a 100%);
+        }
+        body.dark input, body.dark select, body.dark textarea {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-color: #334155;
+        }
+        body.dark .bar-track { background: #334155; }
+        body.dark .check-row { border-bottom-color: #334155; }
+        body.dark .rpt-table th { background: #334155; color: #e2e8f0; }
+        body.dark .rpt-table td { border-bottom-color: #334155; }
+        body.dark .rpt-kpi-strip { background: rgba(15,23,42,0.8); }
+        body.dark .rpt-hist-item { border-bottom-color: #334155; }
+        body.dark .inv-item { border-bottom-color: #334155; }
+        body.dark .acc-card { background: #1e293b; border-color: #334155; }
+        body.dark .tl-item { border-left-color: #334155; }
+        body.dark details summary { color: #94a3b8; }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 120% 60% at 50% -10%, rgba(29,78,216,0.12) 0%, transparent 70%);
+            background-attachment: fixed;
+            color: var(--text);
+            margin: 0; padding: 0;
+            padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom));
+            min-height: 100vh;
+        }
+
+        /* ══ HEADER ══ */
+        .app-header {
+            background: linear-gradient(135deg, #0c1445 0%, #162060 50%, #1d4ed8 100%);
+            color: white;
+            padding: 20px 20px 16px;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: var(--shadow-header);
+        }
+        .app-header h1 { margin: 0; font-size: 1.08rem; font-weight: 800; letter-spacing: -0.01em; }
+        .app-header p  { margin: 4px 0 0; font-size: 0.72rem; opacity: 0.7; font-weight: 500; }
+        .header-row { display: flex; justify-content: space-between; align-items: flex-start; }
+        .header-date { font-size: 0.68rem; opacity: 0.6; text-align: right; margin-top: 2px; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 20px; }
+
+        /* ══ TAB BAR ══ */
+        .tab-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(29,78,216,0.09);
+            box-shadow: 0 -4px 24px rgba(29,78,216,0.09);
+            display: flex; z-index: 200;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .tab-btn {
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 3px; border: none; background: none; cursor: pointer;
+            color: #94a3b8; font-size: 0.58rem; font-weight: 700; padding: 6px 0;
+            transition: color 0.2s; letter-spacing: 0.02em; text-transform: uppercase;
+        }
+        .tab-btn svg { width: 21px; height: 21px; transition: transform 0.2s; }
+        .tab-btn.active { color: var(--primary); }
+        .tab-btn.active svg { transform: scale(1.1); }
+
+        /* ══ PAGES ══ */
+        .page { display: none; padding: 16px; }
+        .page.active { display: block; animation: fadeUp 0.22s ease; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ══ CARDS ══ */
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 18px 18px 16px;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(29,78,216,0.05);
+        }
+        .card h2 {
+            margin: 0 0 14px;
+            font-size: 0.92rem; font-weight: 800;
+            display: flex; align-items: center; gap: 8px;
+            letter-spacing: -0.01em;
+        }
+        .card h2 span.icon { font-size: 1.05rem; }
+
+        /* ══ ACCOUNT CARDS ══ */
+        .acc-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(29,78,216,0.05);
+            overflow: hidden;
+        }
+        /* Gradient stripe top */
+        .acc-card::before {
+            content: ''; display: block; height: 5px; width: 100%;
+        }
+        .acc-card.nu::before       { background: linear-gradient(90deg, #5b21b6, #8b5cf6, #a78bfa); }
+        .acc-card.revolut::before  { background: linear-gradient(90deg, #1e3a8a, #1d4ed8, #60a5fa); }
+        .acc-card.openbank::before { background: linear-gradient(90deg, #0369a1, #0284c7, #38bdf8); }
+        .acc-card.gbm::before      { background: linear-gradient(90deg, #9d174d, #db2777, #f472b6); }
+        .acc-card.finsus::before   { background: linear-gradient(90deg, #065f46, #059669, #34d399); }
+        .acc-card-inner { padding: 16px 18px 18px; }
+
+        .acc-card h2 { margin: 0 0 8px; font-size: 0.92rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.01em; }
+        .acc-card.nu h2       { color: var(--nu); }
+        .acc-card.revolut h2  { color: var(--rev); }
+        .acc-card.openbank h2 { color: var(--ob); }
+        .acc-card.gbm h2      { color: var(--gbm); }
+        .acc-card.finsus h2   { color: var(--green); }
+
+        .acc-balance { font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 4px; letter-spacing: -0.03em; }
+        .acc-card.nu .acc-balance       { color: var(--nu); }
+        .acc-card.revolut .acc-balance  { color: var(--rev); }
+        .acc-card.openbank .acc-balance { color: var(--ob); }
+        .acc-card.gbm .acc-balance      { color: var(--gbm); }
+        .acc-card.finsus .acc-balance   { color: var(--green); }
+
+        .acc-meta { font-size: 0.72rem; color: var(--muted); margin-bottom: 10px; display: flex; gap: 10px; flex-wrap: wrap; font-weight: 500; }
+        .acc-meta span { display: flex; align-items: center; gap: 3px; }
+        .acc-rend-chip {
+            display: inline-flex; align-items: center;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 0.73rem; font-weight: 700; margin-bottom: 14px;
+        }
+        .acc-card.nu .acc-rend-chip       { background: var(--nu-faint);    color: var(--nu); }
+        .acc-card.revolut .acc-rend-chip  { background: var(--rev-faint);   color: var(--rev); }
+        .acc-card.openbank .acc-rend-chip { background: var(--ob-faint);    color: var(--ob); }
+        .acc-card.gbm .acc-rend-chip      { background: var(--gbm-faint);   color: var(--gbm); }
+        .acc-card.finsus .acc-rend-chip   { background: var(--green-faint); color: var(--green); }
+
+        /* ══ PROGRESS ══ */
+        .goal-block { margin-bottom: 18px; }
+        .goal-block:last-child { margin-bottom: 0; }
+        .goal-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
+        .goal-label .name { font-size: 0.87rem; font-weight: 700; color: var(--text); }
+        .goal-label .pct  { font-size: 0.82rem; color: var(--primary); font-weight: 800; }
+        .goal-amounts { display: flex; justify-content: space-between; font-size: 0.73rem; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
+        .bar-track {
+            background: #e2e8f0;
+            border-radius: 10px; height: 12px; overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .bar-fill {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+            height: 100%; border-radius: 10px;
+            transition: width 0.9s cubic-bezier(.4,0,.2,1);
+            box-shadow: 0 1px 4px rgba(29,78,216,0.25);
+        }
+        .bar-fill.green   { background: linear-gradient(90deg, #065f46, #34d399); }
+        .bar-fill.nu      { background: linear-gradient(90deg, #5b21b6, #a78bfa); }
+        .bar-fill.revolut { background: linear-gradient(90deg, #1e3a8a, #60a5fa); }
+        .bar-fill.ob      { background: linear-gradient(90deg, #0369a1, #38bdf8); }
+        .bar-fill.gbm     { background: linear-gradient(90deg, #9d174d, #f472b6); }
+        .goal-note { font-size: 0.7rem; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+        /* ══ STAT CHIPS ══ */
+        .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+        .stat-chip {
+            background: white;
+            border-radius: 16px; padding: 14px 10px;
+            text-align: center;
+            box-shadow: var(--shadow-chip);
+            border: 1px solid rgba(29,78,216,0.07);
+        }
+        .stat-chip.green-chip { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-color: rgba(5,150,105,0.12); }
+        .stat-chip.nu-chip    { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border-color: rgba(124,58,237,0.12); }
+        .stat-chip.rev-chip   { background: linear-gradient(135deg, #eff6ff, #dbeafe); border-color: rgba(29,78,216,0.12); }
+        .stat-chip.ob-chip    { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-color: rgba(2,132,199,0.12); }
+        .stat-chip.gbm-chip   { background: linear-gradient(135deg, #fdf2f8, #fce7f3); border-color: rgba(219,39,119,0.12); }
+        .stat-chip .val {
+            font-size: 1.05rem; font-weight: 900; color: var(--primary);
+            line-height: 1.1; letter-spacing: -0.02em;
+        }
+        .stat-chip.green-chip .val { color: var(--green); }
+        .stat-chip.nu-chip .val    { color: var(--nu); }
+        .stat-chip.rev-chip .val   { color: var(--rev); }
+        .stat-chip.ob-chip .val    { color: var(--ob); }
+        .stat-chip.gbm-chip .val   { color: var(--gbm); }
+        .stat-chip .lbl { font-size: 0.6rem; color: var(--muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+
+        /* ══ ALERTS ══ */
+        .alert {
+            border-radius: 12px; padding: 12px 14px;
+            font-size: 0.82rem; margin-bottom: 12px; line-height: 1.5;
+            font-weight: 500;
+        }
+        .alert.warn { background: #fffbeb; border-left: 4px solid var(--gold-light); color: #78350f; }
+        .alert.good { background: var(--green-faint); border-left: 4px solid var(--green); color: #064e3b; }
+        .alert.info { background: var(--primary-faint); border-left: 4px solid var(--primary-light); color: #1e3a8a; }
+
+        /* ══ CHECKLIST ══ */
+        .check-row {
+            display: flex; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid #f1f5f9; gap: 8px;
+        }
+        .check-row:last-child { border-bottom: none; }
+        .check-row .month { flex: 1; font-size: 0.85rem; font-weight: 700; }
+        .check-row .month small { display: block; font-size: 0.68rem; color: var(--muted); font-weight: 500; margin-top: 1px; }
+        .chk-group { display: flex; gap: 6px; }
+        .chk-label { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
+        .chk-label span { font-size: 0.56rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+        .chk-box {
+            width: 30px; height: 30px; border-radius: 9px;
+            border: 2px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s; cursor: pointer;
+            user-select: none; -webkit-user-select: none;
+            background: white;
+        }
+        .chk-box.c-red   { background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); border-color: var(--primary); }
+        .chk-box.c-green { background: linear-gradient(135deg, #065f46, #34d399); border-color: var(--green); }
+        .chk-box.c-gbm   { background: linear-gradient(135deg, #9d174d, #f472b6); border-color: var(--gbm); }
+        .chk-box svg { width: 15px; height: 15px; display: none; }
+        .chk-box.c-red svg, .chk-box.c-green svg, .chk-box.c-gbm svg { display: block; }
+
+        /* ══ INPUTS ══ */
+        .input-group { margin-bottom: 14px; }
+        .input-group label {
+            display: block; font-size: 0.75rem; font-weight: 700;
+            margin-bottom: 7px; color: var(--muted);
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .input-group input, .input-group select {
+            width: 100%; padding: 13px 16px;
+            border: 1.5px solid #e2e8f0; border-radius: 12px;
+            font-size: 0.95rem; outline: none; transition: border 0.2s, box-shadow 0.2s;
+            background: white; color: var(--text); font-family: inherit; font-weight: 500;
+        }
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.12);
+        }
+        .btn {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            color: white; border: none; border-radius: 14px;
+            font-size: 0.95rem; font-weight: 800; cursor: pointer;
+            box-shadow: var(--shadow-btn); letter-spacing: 0.01em;
+            transition: opacity 0.15s, transform 0.15s;
+        }
+        .btn:active { opacity: 0.88; transform: scale(0.99); }
+        .btn.secondary {
+            background: white; color: var(--primary);
+            border: 2px solid rgba(29,78,216,0.3); margin-top: 10px;
+            box-shadow: none;
+        }
+        .btn.nu-btn  { background: linear-gradient(135deg, #5b21b6, #8b5cf6); box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+        .btn.rev-btn { background: linear-gradient(135deg, #1e3a8a, #3b82f6); box-shadow: var(--shadow-btn); }
+        .btn.ob-btn  { background: linear-gradient(135deg, #0369a1, #0ea5e9); box-shadow: 0 4px 14px rgba(2,132,199,0.3); }
+        .btn.gbm-btn { background: linear-gradient(135deg, #9d174d, #ec4899); box-shadow: 0 4px 14px rgba(219,39,119,0.3); }
+
+        /* ══ INVESTMENTS ══ */
+        .inv-item {
+            padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .inv-item:last-child { border-bottom: none; }
+        .inv-item .ii-name { font-size: 0.87rem; font-weight: 700; }
+        .inv-item .ii-date { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+        .inv-item .ii-rend { font-size: 0.82rem; color: var(--green); font-weight: 800; }
+        .inv-item .ii-status { font-size: 0.67rem; color: var(--muted); }
+
+        /* ══ TIMELINE ══ */
+        .timeline { position: relative; padding-left: 26px; }
+        .timeline::before { content: ''; position: absolute; left: 9px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--primary-light), #dbeafe); border-radius: 2px; }
+        .tl-item { position: relative; margin-bottom: 18px; }
+        .tl-item::before {
+            content: ''; position: absolute; left: -21px; top: 3px;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #dbeafe; border: 2px solid white;
+            box-shadow: 0 0 0 2px #dbeafe;
+        }
+        .tl-item.done::before    { background: var(--green); box-shadow: 0 0 0 3px rgba(5,150,105,0.15); }
+        .tl-item.current::before { background: var(--primary); box-shadow: 0 0 0 4px rgba(29,78,216,0.2); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 0 4px rgba(29,78,216,0.2)} 50%{box-shadow:0 0 0 7px rgba(29,78,216,0.08)} }
+        .tl-item .tl-month  { font-size: 0.8rem; font-weight: 700; }
+        .tl-item .tl-amount { font-size: 0.74rem; color: var(--primary); font-weight: 700; margin-top: 2px; }
+        .tl-item .tl-desc   { font-size: 0.7rem; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+        /* ══ SIM RESULT ══ */
+        .sim-result {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 14px; padding: 16px; margin-top: 16px;
+            border: 1px solid rgba(29,78,216,0.1);
+        }
+        .sr-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.84rem; border-bottom: 1px solid rgba(29,78,216,0.08); font-weight: 500; }
+        .sr-row:last-child { border-bottom: none; font-weight: 800; font-size: 0.9rem; }
+        .sr-val { color: var(--primary); font-weight: 700; }
+
+        /* ══ TOAST ══ */
+        .toast {
+            position: fixed;
+            bottom: calc(var(--tab-h) + 14px + env(safe-area-inset-bottom));
+            left: 50%; transform: translateX(-50%) translateY(80px);
+            background: rgba(15,23,42,0.92);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: white; padding: 11px 22px; border-radius: 22px;
+            font-size: 0.85rem; font-weight: 600;
+            z-index: 999; transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+            white-space: nowrap; max-width: 90vw; text-align: center;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ══ MISC ══ */
+        .danger-btn { background: none; border: none; color: #ef4444; font-size: 0.78rem; padding: 0; cursor: pointer; text-decoration: underline; font-weight: 600; }
+        .section-label { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 0 0 8px; }
+
+        /* ══════════════════════════════════════
+           REPORTE DE ÉLITE
+        ══════════════════════════════════════ */
+        #page-reporte { padding: 0; }
+        .rpt-hero {
+            background: linear-gradient(135deg, #0c1445 0%, #162060 50%, #1d4ed8 100%);
+            color: white; padding: 30px 20px 24px; position: relative; overflow: hidden;
+        }
+        .rpt-hero::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+        .rpt-hero::after  { content: ''; position: absolute; bottom: -70px; left: -30px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.03); }
+        .rpt-hero-label { font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px; font-weight: 600; }
+        .rpt-hero-title { font-size: 1.5rem; font-weight: 900; margin: 0 0 6px; line-height: 1.15; letter-spacing: -0.02em; }
+        .rpt-hero-sub   { font-size: 0.75rem; opacity: 0.65; margin-bottom: 8px; font-weight: 500; }
+        .rpt-hero-date  { font-size: 0.68rem; opacity: 0.5; background: rgba(255,255,255,0.08); display: inline-block; padding: 3px 10px; border-radius: 20px; }
+
+        .rpt-kpi-strip {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            background: white; border-bottom: 1px solid #f1f5f9;
+        }
+        .rpt-kpi { padding: 16px 10px; text-align: center; border-right: 1px solid #f1f5f9; }
+        .rpt-kpi:last-child { border-right: none; }
+        .rpt-kpi .k-val { font-size: 1rem; font-weight: 900; color: var(--primary); line-height: 1; letter-spacing: -0.02em; }
+        .rpt-kpi .k-lbl { font-size: 0.57rem; color: var(--muted); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+
+        .rpt-body { padding: 16px; }
+        .rpt-section { margin-bottom: 20px; }
+        .rpt-section-title {
+            font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.14em; color: var(--muted); margin: 0 0 12px;
+            padding-bottom: 7px; border-bottom: 2px solid #f1f5f9;
+        }
+
+        .rpt-score-wrap { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+        .rpt-gauge { width: 84px; height: 84px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+        .rpt-gauge-inner { width: 66px; height: 66px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .rpt-gauge-inner .g-num { font-size: 1.35rem; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+        .rpt-gauge-inner .g-lbl { font-size: 0.5rem; color: var(--muted); font-weight: 600; }
+        .rpt-score-text .st-title { font-size: 1rem; font-weight: 900; margin-bottom: 4px; letter-spacing: -0.01em; }
+        .rpt-score-text .st-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.45; font-weight: 500; }
+
+        .rpt-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .rpt-table th {
+            background: #f8faff; padding: 9px 10px; text-align: left;
+            font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.07em;
+            color: var(--muted); border-bottom: 2px solid #e2e8f0; font-weight: 700;
+        }
+        .rpt-table td { padding: 9px 10px; border-bottom: 1px solid #f1f5f9; font-weight: 500; }
+        .rpt-table tr:last-child td { border-bottom: none; }
+        .td-red   { color: var(--primary); font-weight: 700; }
+        .td-green { color: var(--green); font-weight: 700; }
+        .td-nu    { color: var(--nu); font-weight: 700; }
+        .td-rev   { color: var(--rev); font-weight: 700; }
+        .td-ob    { color: var(--ob); font-weight: 700; }
+        .td-gbm   { color: var(--gbm); font-weight: 700; }
+        .td-muted { color: var(--muted); }
+
+        .rpt-hist-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.82rem; }
+        .rpt-hist-item:last-child { border-bottom: none; }
+        .hi-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+        .rpt-mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 64px; margin-top: 10px; }
+        .rpt-mini-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .rpt-mini-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; }
+        .rpt-mini-bar.past   { background: #dbeafe; }
+        .rpt-mini-bar.curr   { background: linear-gradient(180deg, var(--primary-light), var(--primary-dark)); }
+        .rpt-mini-bar.future { background: #bfdbfe; }
+        .rpt-mini-lbl { font-size: 0.5rem; color: var(--muted); font-weight: 600; }
+
+        .rpt-rec { display: flex; gap: 10px; padding: 11px 13px; border-radius: 12px; margin-bottom: 8px; font-size: 0.82rem; line-height: 1.45; font-weight: 500; }
+        .rpt-rec.r-green { background: var(--green-faint); border: 1px solid rgba(5,150,105,0.1); }
+        .rpt-rec.r-warn  { background: var(--gold-faint); border: 1px solid rgba(217,119,6,0.12); }
+        .rpt-rec.r-info  { background: var(--primary-faint); border: 1px solid rgba(29,78,216,0.1); }
+        .rpt-rec .r-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+        /* Conclusiones del Estratega */
+        .rpt-conclusiones-card {
+            background: linear-gradient(135deg, #0c1445 0%, #162060 60%, #1e3a8a 100%);
+            color: white; border-radius: 18px; padding: 20px; margin-bottom: 14px;
+            box-shadow: 0 8px 32px rgba(12,20,69,0.3);
+        }
+        .rpt-conclusiones-card .c-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .rpt-conclusiones-card .c-logo { font-size: 2rem; }
+        .rpt-conclusiones-card .c-title { font-size: 0.95rem; font-weight: 900; letter-spacing: -0.01em; }
+        .rpt-conclusiones-card .c-sub   { font-size: 0.68rem; opacity: 0.55; margin-top: 3px; font-weight: 500; }
+        .rpt-conclusiones-card .c-line  { font-size: 0.82rem; line-height: 1.6; opacity: 0.82; margin-bottom: 12px; padding-left: 14px; border-left: 3px solid rgba(96,165,250,0.4); font-weight: 400; }
+        .rpt-conclusiones-card .c-line:last-child { margin-bottom: 0; }
+        .rpt-conclusiones-card .c-line strong { opacity: 1; color: #fcd34d; }
+
+        /* Export button */
+        .rpt-export-btn {
+            width: 100%; padding: 16px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white; border: none; border-radius: 16px;
+            font-size: 0.95rem; font-weight: 800; cursor: pointer;
+            letter-spacing: 0.02em; box-shadow: var(--shadow-btn);
+            margin-bottom: 10px; transition: opacity 0.15s;
+        }
+        .rpt-export-btn:active { opacity: 0.85; }
+        .rpt-export-row { padding: 0 0 6px; }
+
+        /* ═══ PRINT / PDF ═══ */
+        @media print {
+            @page { size: A4 portrait; margin: 1.5cm 1.5cm 2cm; }
+            body { background: white !important; padding: 0 !important; font-size: 11pt; color: #000; }
+            .app-header, .tab-bar, .toast,
+            #page-dashboard, #page-checklist, #page-cuentas, #page-sim { display: none !important; }
+            #page-reporte { display: block !important; padding: 0; }
+            .rpt-export-row, .rpt-export-btn, .btn.secondary { display: none !important; }
+            .rpt-hero { print-color-adjust: exact; -webkit-print-color-adjust: exact; border-radius: 0; }
+            .rpt-kpi-strip, .rpt-table th { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .rpt-conclusiones-card { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .rpt-section { page-break-inside: avoid; }
+            .rpt-conclusiones-card { page-break-before: auto; }
+            .card, .acc-card { box-shadow: none !important; border: 1px solid #eee; border-radius: 8px; }
+            .rpt-print-footer { display: block !important; position: fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size: 8pt; color: #888; border-top: 1px solid #ddd; padding: 4px 0; background: white; }
+            .rpt-body { padding: 12px; }
+        }
+        .rpt-print-footer { display: none; }
+    </style>
+</head>
+<body>
+
+<header class="app-header">
+    <div class="header-row">
+        <div>
+            <h1>🚗 Mazda CX-30 i Sport 2027</h1>
+            <p>Meta: Julio 2027 · Multiahorro Diversificado</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <button id="dark-toggle" onclick="toggleDark()" style="background:rgba(255,255,255,0.12);border:none;cursor:pointer;border-radius:20px;padding:4px 10px;font-size:1rem;line-height:1;" title="Modo oscuro">🌙</button>
+            <div class="header-date" id="header-date"></div>
+        </div>
+    </div>
+</header>
+
+<!-- ══════════════════════ INICIO ══════════════════════ -->
+<section class="page active" id="page-dashboard">
+
+    <div id="alert-banner"></div>
+
+    <!-- KPIs principales -->
+    <div class="stat-row">
+        <div class="stat-chip">
+            <div class="val" id="stat-meses">–</div>
+            <div class="lbl">Meses<br>restantes</div>
+        </div>
+        <div class="stat-chip green-chip">
+            <div class="val" id="stat-patrimonio">$0</div>
+            <div class="lbl">Patrimonio<br>total</div>
+        </div>
+        <div class="stat-chip">
+            <div class="val" id="stat-rend-mes">$0</div>
+            <div class="lbl">Interés<br>mensual</div>
+        </div>
+        <div class="stat-chip green-chip">
+            <div class="val" id="stat-uni-saved">$0</div>
+            <div class="lbl">Fondo<br>Universidad</div>
+        </div>
+    </div>
+
+    <!-- Progreso Mazda -->
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">🚗</span> Meta Mazda — Enganche 30%</h2>
+        <div class="goal-block">
+            <div class="goal-label">
+                <span class="name">Enganche: $141,570 MXN</span>
+                <span class="pct" id="pct-mazda">0%</span>
+            </div>
+            <div class="goal-amounts">
+                <span id="saved-mazda-lbl">Ahorrado: $0</span>
+                <span>Meta: $141,570</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" id="bar-mazda"></div></div>
+            <div class="goal-note" id="mazda-breakdown">Nu $0 · Openbank $0 · GBM $0</div>
+            <div id="ritmo-indicator"></div>
+        </div>
+    </div>
+
+    <!-- Desglose por cuenta (chips 2x2) -->
+    <div class="stat-row">
+        <div class="stat-chip nu-chip">
+            <div class="val" id="chip-nu">$0</div>
+            <div class="lbl">Nu<br>13% anual</div>
+        </div>
+        <div class="stat-chip rev-chip">
+            <div class="val" id="chip-rev">$0</div>
+            <div class="lbl">Revolut<br>15% anual</div>
+        </div>
+        <div class="stat-chip ob-chip">
+            <div class="val" id="chip-ob">$0</div>
+            <div class="lbl">Openbank<br>13% anual</div>
+        </div>
+        <div class="stat-chip gbm-chip">
+            <div class="val" id="chip-gbm">$0</div>
+            <div class="lbl">GBM+<br>~11% anual</div>
+        </div>
+    </div>
+
+    <!-- Progreso Universidad -->
+    <div class="card">
+        <h2 style="color:var(--green)"><span class="icon">🎓</span> Meta Universidad — Año 2</h2>
+        <div class="goal-block">
+            <div class="goal-label">
+                <span class="name">Año 2 asegurado: $60,000 MXN</span>
+                <span class="pct" id="pct-uni">0%</span>
+            </div>
+            <div class="goal-amounts">
+                <span id="saved-uni-lbl">Ahorrado: $0</span>
+                <span>Meta: $60,000</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill green" id="bar-uni"></div></div>
+            <div class="goal-note">Cascada Finsus: $5,000/mes a 360 días (15% anual).</div>
+        </div>
+    </div>
+
+    <!-- Aportación manual -->
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">💰</span> Registrar Aportación</h2>
+        <div class="input-group">
+            <label>Monto</label>
+            <input type="number" id="aporte-monto" placeholder="$0.00" inputmode="decimal">
+        </div>
+        <div class="input-group">
+            <label>Cuenta destino</label>
+            <select id="aporte-destino">
+                <option value="nu">Nu — Liquidez Mazda 🟣 (13%, tope $25k)</option>
+                <option value="revolut">Revolut — Liquidez Mazda 🔵 (15%, tope $25k)</option>
+                <option value="openbank">Openbank — Excedentes Mazda 🩵 (13%)</option>
+                <option value="gbm">GBM+ — Acelerador 💗 (~11% S&P500)</option>
+                <option value="uni">Finsus — Universidad 🟢 (15%)</option>
+            </select>
+        </div>
+        <button class="btn" onclick="registrarAporte()">Registrar Aportación</button>
+        <p style="text-align:center;margin-top:12px;"><button class="danger-btn" onclick="resetConfirm()">Reiniciar todos los datos</button></p>
+    </div>
+
+</section>
+
+<!-- ══════════════════════ CHECKLIST ══════════════════════ -->
+<section class="page" id="page-checklist">
+
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">📋</span> Checklist Mayo–Dic 2026</h2>
+        <p style="font-size:0.78rem;color:var(--muted);margin:0 0 12px;">Al marcar Mazda $10k, se distribuye automáticamente: Nu hasta $50k → excedente a Openbank. Dic incluye aguinaldo a GBM+.</p>
+        <div id="checklist-2026"></div>
+    </div>
+
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">📊</span> Progreso del checklist</h2>
+        <div id="checklist-stats"></div>
+    </div>
+
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">📅</span> Checklist Ene–Jun 2027</h2>
+        <p style="font-size:0.78rem;color:var(--muted);margin:0 0 12px;">Tramo final hacia el enganche.</p>
+        <div id="checklist-2027"></div>
+    </div>
+
+</section>
+
+<!-- ══════════════════════ CUENTAS ══════════════════════ -->
+<section class="page" id="page-cuentas">
+
+    <!-- Nu -->
+    <div class="acc-card nu">
+        <div class="acc-card-inner">
+        <h2><span class="icon">🟣</span> Nu — Liquidez Mazda</h2>
+        <div class="acc-balance" id="nu-balance">$0</div>
+        <div class="acc-meta">
+            <span>13% anual</span>
+            <span>Tope: $25,000</span>
+        </div>
+        <div class="acc-rend-chip" id="nu-rend-chip">Rend mensual: $0</div>
+        <div class="bar-track" style="margin-bottom:10px;">
+            <div class="bar-fill nu" id="bar-nu" style="width:0%"></div>
+        </div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:12px;" id="nu-limit-txt">$0 de $25,000 usados (0%)</div>
+        <div class="input-group" style="margin-bottom:8px;">
+            <input type="number" id="nu-deposit" placeholder="Depositar en Nu..." inputmode="decimal">
+        </div>
+        <button class="btn nu-btn" onclick="depositarCuenta('nu')">+ Depositar en Nu</button>
+        <details style="margin-top:10px;">
+            <summary style="font-size:0.75rem;color:var(--muted);font-weight:600;cursor:pointer;list-style:none;">⚙️ Ajustar saldo real</summary>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+                <input type="number" id="adj-nu" placeholder="Saldo real actual ($)" inputmode="decimal" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:12px;font-size:0.85rem;">
+                <button class="btn nu-btn" style="padding:10px 14px;font-size:0.8rem;" onclick="ajustarSaldo('nu')">Sync</button>
+            </div>
+        </details>
+        </div>
+    </div>
+
+    <!-- Revolut -->
+    <div class="acc-card revolut">
+        <div class="acc-card-inner">
+        <h2><span class="icon">🔵</span> Revolut — Liquidez Mazda</h2>
+        <div class="acc-balance" id="rev-balance">$0</div>
+        <div class="acc-meta">
+            <span>15% anual</span>
+            <span>Tope: $25,000</span>
+        </div>
+        <div class="acc-rend-chip" id="rev-rend-chip">Rend mensual: $0</div>
+        <div class="bar-track" style="margin-bottom:10px;">
+            <div class="bar-fill revolut" id="bar-rev" style="width:0%"></div>
+        </div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-bottom:12px;" id="rev-limit-txt">$0 de $25,000 usados (0%)</div>
+        <div class="input-group" style="margin-bottom:8px;">
+            <input type="number" id="rev-deposit" placeholder="Depositar en Revolut..." inputmode="decimal">
+        </div>
+        <button class="btn rev-btn" onclick="depositarCuenta('revolut')">+ Depositar en Revolut</button>
+        <details style="margin-top:10px;">
+            <summary style="font-size:0.75rem;color:var(--muted);font-weight:600;cursor:pointer;list-style:none;">⚙️ Ajustar saldo real</summary>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+                <input type="number" id="adj-rev" placeholder="Saldo real actual ($)" inputmode="decimal" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:12px;font-size:0.85rem;">
+                <button class="btn rev-btn" style="padding:10px 14px;font-size:0.8rem;" onclick="ajustarSaldo('revolut')">Sync</button>
+            </div>
+        </details>
+        </div>
+    </div>
+
+    <!-- Openbank -->
+    <div class="acc-card openbank">
+        <div class="acc-card-inner">
+        <h2><span class="icon">🩵</span> Openbank — Excedentes</h2>
+        <div class="acc-balance" id="ob-balance">$0</div>
+        <div class="acc-meta">
+            <span>13% anual</span>
+            <span>Sin límite — excedentes de Nu + Revolut</span>
+        </div>
+        <div class="acc-rend-chip" id="ob-rend-chip">Rend mensual: $0</div>
+        <div class="input-group" style="margin-bottom:8px;">
+            <input type="number" id="ob-deposit" placeholder="Depositar en Openbank..." inputmode="decimal">
+        </div>
+        <button class="btn ob-btn" onclick="depositarCuenta('openbank')">+ Depositar en Openbank</button>
+        <details style="margin-top:10px;">
+            <summary style="font-size:0.75rem;color:var(--muted);font-weight:600;cursor:pointer;list-style:none;">⚙️ Ajustar saldo real</summary>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+                <input type="number" id="adj-ob" placeholder="Saldo real actual ($)" inputmode="decimal" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:12px;font-size:0.85rem;">
+                <button class="btn ob-btn" style="padding:10px 14px;font-size:0.8rem;" onclick="ajustarSaldo('openbank')">Sync</button>
+            </div>
+        </details>
+        </div>
+    </div>
+
+    <!-- GBM+ -->
+    <div class="acc-card gbm">
+        <div class="acc-card-inner">
+        <h2><span class="icon">💗</span> GBM+ — Acelerador S&amp;P500</h2>
+        <div class="acc-balance" id="gbm-balance">$0</div>
+        <div class="acc-meta">
+            <span>~11% anual (S&amp;P 500 histórico)</span>
+            <span>Aguinaldo + bonos</span>
+        </div>
+        <div class="acc-rend-chip" id="gbm-rend-chip">Rend mensual: $0</div>
+        <div id="gbm-proyeccion" style="font-size:0.74rem;font-weight:600;color:var(--gbm);margin-bottom:12px;"></div>
+        <div class="input-group" style="margin-bottom:8px;">
+            <input type="number" id="gbm-deposit" placeholder="Depositar en GBM+..." inputmode="decimal">
+        </div>
+        <button class="btn gbm-btn" onclick="depositarCuenta('gbm')">+ Depositar en GBM+</button>
+        <details style="margin-top:10px;">
+            <summary style="font-size:0.75rem;color:var(--muted);font-weight:600;cursor:pointer;list-style:none;">⚙️ Ajustar saldo real</summary>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+                <input type="number" id="adj-gbm" placeholder="Saldo real actual ($)" inputmode="decimal" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:12px;font-size:0.85rem;">
+                <button class="btn gbm-btn" style="padding:10px 14px;font-size:0.8rem;" onclick="ajustarSaldo('gbm')">Sync</button>
+            </div>
+        </details>
+        </div>
+    </div>
+
+    <!-- Finsus -->
+    <div class="acc-card finsus">
+        <div class="acc-card-inner">
+        <h2><span class="icon">🟢</span> Finsus — Cascada Universidad</h2>
+        <div class="acc-balance" id="finsus-total-balance">$0</div>
+        <div class="acc-meta">
+            <span>15% anual</span>
+            <span>360 días por inversión</span>
+            <span>$5,000/mes</span>
+        </div>
+        <div class="acc-rend-chip" id="finsus-rend-chip">Rend mensual: $0</div>
+        <div class="alert info" style="font-size:0.78rem;margin-bottom:12px;">Cada mes abres 1 inversión de $5,000. Los rendimientos mensuales van al fondo Mazda. Al vencer (360 días) el capital queda libre para la universidad.</div>
+        <div id="finsus-list"></div>
+        <button class="btn secondary" onclick="agregarFinsus()" style="margin-top:12px;">+ Registrar inversión de este mes</button>
+        </div>
+    </div>
+
+    <!-- Configuración de tasas -->
+    <div class="card">
+        <h2 style="color:var(--muted)"><span class="icon">⚙️</span> Configuración del Plan</h2>
+        <p style="font-size:0.75rem;color:var(--muted);margin:0 0 14px;">Montos y tasas usados en todos los cálculos, simulaciones y reporte.</p>
+
+        <div style="font-size:0.78rem;font-weight:700;color:var(--text);margin-bottom:8px;">Distribución mensual</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Sueldo neto ($)</label>
+                <input type="number" id="cfg-sueldo" value="32000" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Gastos de vida ($)</label>
+                <input type="number" id="cfg-gastos" value="17000" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Ahorro Mazda ($)</label>
+                <input type="number" id="cfg-mazda" value="10000" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Ahorro Universidad ($)</label>
+                <input type="number" id="cfg-uni" value="5000" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0;grid-column:1/-1">
+                <label style="font-size:0.72rem;">Aguinaldo diciembre ($)</label>
+                <input type="number" id="cfg-aguinaldo" value="16000" inputmode="decimal">
+            </div>
+        </div>
+
+        <div style="font-size:0.78rem;font-weight:700;color:var(--text);margin-bottom:8px;">Tasas anuales</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Nu (%)</label>
+                <input type="number" id="cfg-tasa-nu" value="13" step="0.1" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Revolut (%)</label>
+                <input type="number" id="cfg-tasa-rev" value="15" step="0.1" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">Openbank (%)</label>
+                <input type="number" id="cfg-tasa-openbank" value="13" step="0.1" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0">
+                <label style="font-size:0.72rem;">GBM+ (%)</label>
+                <input type="number" id="cfg-tasa-gbm" value="11" step="0.1" inputmode="decimal">
+            </div>
+            <div class="input-group" style="margin:0;grid-column:1/-1">
+                <label style="font-size:0.72rem;">Finsus (%)</label>
+                <input type="number" id="cfg-tasa-finsus" value="15" step="0.1" inputmode="decimal">
+            </div>
+        </div>
+        <button class="btn" style="margin-top:14px;" onclick="guardarConfig()">Guardar configuración</button>
+    </div>
+
+</section>
+
+<!-- ══════════════════════ SIMULADOR ══════════════════════ -->
+<section class="page" id="page-sim">
+
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">🧮</span> Simulador con Interés Compuesto</h2>
+        <div class="input-group">
+            <label>Aportación mensual Mazda ($)</label>
+            <input type="number" id="sim-mazda" value="10000" inputmode="decimal" oninput="simDebounce()">
+        </div>
+        <div class="input-group">
+            <label>Aportación mensual Uni ($)</label>
+            <input type="number" id="sim-uni" value="5000" inputmode="decimal" oninput="simDebounce()">
+        </div>
+        <div class="input-group">
+            <label>Aguinaldo esperado ($)</label>
+            <input type="number" id="sim-aguinaldo" value="16000" inputmode="decimal" oninput="simDebounce()">
+        </div>
+        <div class="input-group">
+            <label>Capital inicial Mazda ($)</label>
+            <input type="number" id="sim-inicial" value="0" inputmode="decimal"
+                oninput="this._userEdited = this.value !== ''; simDebounce()">
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <input type="checkbox" id="sim-compound" checked style="width:18px;height:18px;accent-color:var(--red);" onchange="simular()">
+            <label for="sim-compound" style="font-size:0.85rem;font-weight:600;">Incluir interés compuesto</label>
+        </div>
+        <div id="sim-result"></div>
+    </div>
+
+    <div class="card">
+        <h2 style="color:var(--red)"><span class="icon">📆</span> Timeline hacia el Mazda</h2>
+        <div class="timeline" id="timeline-container"></div>
+    </div>
+
+</section>
+
+<!-- ══════════════════════ REPORTE ══════════════════════ -->
+<section class="page" id="page-reporte">
+
+    <div class="rpt-hero">
+        <div class="rpt-hero-label">Reporte Financiero Personal</div>
+        <div class="rpt-hero-title">Plan Maestro<br>Mazda CX-30 i Sport</div>
+        <div class="rpt-hero-sub">Multiahorro Diversificado · Nu · Openbank · GBM+ · Finsus</div>
+        <div class="rpt-hero-date" id="rpt-fecha-gen"></div>
+    </div>
+
+    <div class="rpt-kpi-strip">
+        <div class="rpt-kpi">
+            <div class="k-val" id="rpt-kpi-total">$0</div>
+            <div class="k-lbl">Patrimonio<br>total</div>
+        </div>
+        <div class="rpt-kpi">
+            <div class="k-val" id="rpt-kpi-avance">0%</div>
+            <div class="k-lbl">Avance<br>Mazda</div>
+        </div>
+        <div class="rpt-kpi">
+            <div class="k-val" id="rpt-kpi-meses">–</div>
+            <div class="k-lbl">Meses<br>restantes</div>
+        </div>
+    </div>
+
+    <div class="rpt-body">
+
+        <!-- Score -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Índice de Salud del Plan</div>
+            <div class="rpt-score-wrap">
+                <div class="rpt-gauge" id="rpt-gauge-wrap">
+                    <div class="rpt-gauge-inner">
+                        <div class="g-num" id="rpt-score-num">–</div>
+                        <div class="g-lbl">/ 100</div>
+                    </div>
+                </div>
+                <div class="rpt-score-text">
+                    <div class="st-title" id="rpt-score-label">–</div>
+                    <div class="st-desc"  id="rpt-score-desc">–</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance multicuenta -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Balance Multicuenta</div>
+            <table class="rpt-table">
+                <thead>
+                    <tr><th>Cuenta</th><th>Balance</th><th>Tasa</th><th>Rend/mes</th></tr>
+                </thead>
+                <tbody id="rpt-multicuenta-tbody"></tbody>
+            </table>
+        </div>
+
+        <!-- Estado de metas -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Estado de Metas</div>
+            <table class="rpt-table">
+                <thead>
+                    <tr><th>Meta</th><th>Ahorrado</th><th>Faltante</th><th>%</th></tr>
+                </thead>
+                <tbody id="rpt-metas-tbody"></tbody>
+            </table>
+        </div>
+
+        <!-- Mini chart proyección -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Proyección Fondo Mazda (c/interés compuesto)</div>
+            <div class="rpt-mini-bars" id="rpt-mini-chart"></div>
+            <div style="display:flex;gap:12px;margin-top:8px;font-size:0.68rem;color:var(--muted);">
+                <span><span style="display:inline-block;width:10px;height:10px;background:#ddd;border-radius:2px;margin-right:3px;"></span>Pasado</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:var(--red);border-radius:2px;margin-right:3px;"></span>Actual</span>
+                <span><span style="display:inline-block;width:10px;height:10px;background:#f5c0c0;border-radius:2px;margin-right:3px;"></span>Proyectado</span>
+            </div>
+        </div>
+
+        <!-- Finsus vencimientos -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Tabla de Vencimientos Finsus</div>
+            <table class="rpt-table">
+                <thead>
+                    <tr><th>#</th><th>Mes apertura</th><th>Vence</th><th>Rend/mes</th><th>Estado</th></tr>
+                </thead>
+                <tbody id="rpt-finsus-tbody"></tbody>
+            </table>
+        </div>
+
+        <!-- Historial -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Historial de Aportaciones</div>
+            <div id="rpt-historial"></div>
+        </div>
+
+        <!-- Distribución sueldo -->
+        <div class="rpt-section">
+            <div class="rpt-section-title" id="rpt-dist-title">Distribución Mensual del Sueldo</div>
+            <table class="rpt-table">
+                <thead><tr><th>Concepto</th><th>Monto</th><th>Cuenta</th><th>%</th></tr></thead>
+                <tbody id="rpt-dist-tbody"></tbody>
+            </table>
+        </div>
+
+        <!-- Recomendaciones -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Recomendaciones del Sistema</div>
+            <div id="rpt-recomendaciones"></div>
+        </div>
+
+        <!-- Checklist resumen -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Resumen Checklist</div>
+            <div id="rpt-checklist-resumen"></div>
+        </div>
+
+        <!-- Conclusiones del Estratega -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Conclusiones del Estratega</div>
+            <div class="rpt-conclusiones-card">
+                <div class="c-header">
+                    <div class="c-logo">🚗</div>
+                    <div>
+                        <div class="c-title">Análisis Estratégico del Plan</div>
+                        <div class="c-sub">Plan Maestro Mazda CX-30 i Sport · Julio 2027</div>
+                    </div>
+                </div>
+                <div id="rpt-conclusiones-content"></div>
+            </div>
+        </div>
+
+        <!-- Pronóstico de compra -->
+        <div class="rpt-section">
+            <div class="rpt-section-title">Pronóstico de Compra</div>
+            <div id="rpt-pronostico"></div>
+        </div>
+
+        <!-- Botones export -->
+        <div class="rpt-export-row">
+            <button class="rpt-export-btn" onclick="exportarReportePDF()">📄 Exportar Reporte PDF</button>
+            <button class="btn secondary" onclick="compartirReporte()">Compartir resumen</button>
+        </div>
+
+        <p style="text-align:center;font-size:0.7rem;color:#bbb;margin-top:20px;padding-bottom:10px;">
+            "La disciplina es el puente entre las metas y los logros."
+        </p>
+    </div>
+
+    <div class="rpt-print-footer" id="rpt-print-footer"></div>
+</section>
+
+<!-- ══════════════════════ TAB BAR ══════════════════════ -->
+<nav class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('dashboard',this)">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="#888"/></svg>
+        Inicio
+    </button>
+    <button class="tab-btn" onclick="showTab('checklist',this)">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#888"/></svg>
+        Checklist
+    </button>
+    <button class="tab-btn" onclick="showTab('cuentas',this)">
+        <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" fill="#888"/></svg>
+        Cuentas
+    </button>
+    <button class="tab-btn" onclick="showTab('sim',this)">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" fill="#888"/></svg>
+        Simular
+    </button>
+    <button class="tab-btn" onclick="showTab('reporte',this)">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8zm0-4h8v2H8zm0-4h5v2H8z" fill="#888"/></svg>
+        Reporte
+    </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CONSTANTES
+// ══════════════════════════════════════════════════════════
+const META_MAZDA  = 141570;
+const META_UNI    = 60000;
+const NU_LIMIT    = 25000;    // Nu tope $25k (13%)
+const REV_LIMIT   = 25000;    // Revolut tope $25k (15%)
+const TARGET_DATE = new Date('2027-07-01');
+
+// Tasas — se sincronizan desde state para ser editables
+let TASA_NU       = 0.13;
+let TASA_REV      = 0.15;
+let TASA_OPENBANK = 0.13;
+let TASA_GBM      = 0.11;
+let TASA_FINSUS   = 0.15;
+
+function syncTasas() {
+    const t       = state.tasas || {};
+    TASA_NU       = t.nu       ?? 0.13;
+    TASA_REV      = t.rev      ?? 0.15;
+    TASA_OPENBANK = t.openbank ?? 0.13;
+    TASA_GBM      = t.gbm      ?? 0.11;
+    TASA_FINSUS   = t.finsus   ?? 0.15;
+}
+
+const DB_KEY    = 'mazda_plan_v2';
+const DB_KEY_V1 = 'mazda_plan_v1';
+
+// ══════════════════════════════════════════════════════════
+//  ESTADO & PERSISTENCIA
+// ══════════════════════════════════════════════════════════
+function defaultState() {
+    return {
+        nu_saved:       0,
+        rev_saved:      0,
+        openbank_saved: 0,
+        gbm_saved:      0,
+        uni_saved:      0,
+        finsus:         [],
+        checklist:      {},
+        historial:      [],
+        tasas:  { nu: 0.13, rev: 0.15, openbank: 0.13, gbm: 0.11, finsus: 0.15 },
+        config: { sueldo: 32000, gastos: 17000, ahorro_mazda: 10000, ahorro_uni: 5000, aguinaldo: 16000 }
+    };
+}
+
+function loadState() {
+    try {
+        const raw = localStorage.getItem(DB_KEY);
+        if (raw) return JSON.parse(raw);
+
+        // Migrar desde v1 (tenía mazda_saved único)
+        const oldRaw = localStorage.getItem(DB_KEY_V1);
+        if (oldRaw) {
+            const old = JSON.parse(oldRaw);
+            const s   = defaultState();
+            const m   = old.mazda_saved || 0;
+            // Distribuir en Nu ($25k) → Revolut ($25k) → Openbank
+            s.nu_saved       = Math.min(m, NU_LIMIT);
+            const resto1     = Math.max(0, m - NU_LIMIT);
+            s.rev_saved      = Math.min(resto1, REV_LIMIT);
+            s.openbank_saved = Math.max(0, resto1 - REV_LIMIT);
+            s.uni_saved      = old.uni_saved  || 0;
+            s.finsus         = old.finsus     || [];
+            s.checklist      = old.checklist  || {};
+            s.historial      = old.historial  || [];
+            saveState(s);
+            return s;
+        }
+        // Migrar desde v2 (tenía nu_saved sin rev_saved)
+        const v2Raw = localStorage.getItem(DB_KEY);
+        if (v2Raw) {
+            const v2 = JSON.parse(v2Raw);
+            if (v2.rev_saved === undefined) {
+                // Split nu_saved en Nu + Revolut
+                const nu_old = v2.nu_saved || 0;
+                v2.nu_saved  = Math.min(nu_old, NU_LIMIT);
+                const exceso = Math.max(0, nu_old - NU_LIMIT);
+                v2.rev_saved = Math.min(exceso, REV_LIMIT);
+                v2.openbank_saved = (v2.openbank_saved || 0) + Math.max(0, exceso - REV_LIMIT);
+                saveState(v2);
+                return v2;
+            }
+        }
+        return defaultState();
+    } catch(e) { return defaultState(); }
+}
+
+function saveState(s) { localStorage.setItem(DB_KEY, JSON.stringify(s)); }
+
+let state = loadState();
+if (!state.tasas)  state.tasas  = defaultState().tasas;
+if (!state.config) state.config = defaultState().config;
+syncTasas();
+
+// ── Helpers ──
+const fmt = n => '$' + Math.round(n).toLocaleString('es-MX');
+const mazdaTotal    = () => state.nu_saved + (state.rev_saved||0) + state.openbank_saved + state.gbm_saved;
+const finsusCapital = () => state.finsus.reduce((a, f) => a + f.monto, 0);
+
+function interesTotal() {
+    return Math.round(
+        state.nu_saved       * TASA_NU       / 12 +
+        (state.rev_saved||0) * TASA_REV      / 12 +
+        state.openbank_saved * TASA_OPENBANK / 12 +
+        state.gbm_saved      * TASA_GBM      / 12 +
+        finsusCapital()      * TASA_FINSUS   / 12
+    );
+}
+
+function calcMesesRestantes() {
+    return Math.max(0, Math.ceil((TARGET_DATE - new Date()) / (1000 * 60 * 60 * 24 * 30.44)));
+}
+
+function svgCheck() {
+    return `<svg viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+}
+
+// ══════════════════════════════════════════════════════════
+//  UTILIDADES UI
+// ══════════════════════════════════════════════════════════
+function toast(msg, ms = 2500) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), ms);
+}
+
+function showTab(name, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-btn svg *').forEach(el => el.setAttribute('fill', '#888'));
+    btn.querySelectorAll('svg *').forEach(el => el.setAttribute('fill', '#1d4ed8'));
+    if (name === 'reporte') renderReporte();
+}
+
+function guardarConfig() {
+    const getNum = id => Math.max(0, parseFloat(document.getElementById(id).value) || 0);
+    const getPct = id => getNum(id) / 100;
+    state.tasas = {
+        nu:       getPct('cfg-tasa-nu'),
+        rev:      getPct('cfg-tasa-rev'),
+        openbank: getPct('cfg-tasa-openbank'),
+        gbm:      getPct('cfg-tasa-gbm'),
+        finsus:   getPct('cfg-tasa-finsus'),
+    };
+    state.config = {
+        sueldo:      getNum('cfg-sueldo'),
+        gastos:      getNum('cfg-gastos'),
+        ahorro_mazda: getNum('cfg-mazda'),
+        ahorro_uni:   getNum('cfg-uni'),
+        aguinaldo:    getNum('cfg-aguinaldo'),
+    };
+    syncTasas();
+    saveState(state);
+    renderAll();
+    toast('✅ Configuración guardada');
+}
+
+function renderTasasConfig() {
+    const t   = state.tasas;
+    const cfg = state.config;
+    const pct = x => Math.round(x * 10000) / 100;
+    document.getElementById('cfg-tasa-nu').value       = pct(t.nu);
+    document.getElementById('cfg-tasa-rev').value      = pct(t.rev);
+    document.getElementById('cfg-tasa-openbank').value = pct(t.openbank);
+    document.getElementById('cfg-tasa-gbm').value      = pct(t.gbm);
+    document.getElementById('cfg-tasa-finsus').value   = pct(t.finsus);
+    document.getElementById('cfg-sueldo').value        = cfg.sueldo;
+    document.getElementById('cfg-gastos').value        = cfg.gastos;
+    document.getElementById('cfg-mazda').value         = cfg.ahorro_mazda;
+    document.getElementById('cfg-uni').value           = cfg.ahorro_uni;
+    document.getElementById('cfg-aguinaldo').value     = cfg.aguinaldo;
+}
+
+function toggleDark() {
+    const isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('dark_mode', isDark ? '1' : '0');
+    document.getElementById('dark-toggle').textContent = isDark ? '☀️' : '🌙';
+}
+
+function applyDark() {
+    if (localStorage.getItem('dark_mode') === '1') {
+        document.body.classList.add('dark');
+        document.getElementById('dark-toggle').textContent = '☀️';
+    }
+}
+
+function ajustarSaldo(cuenta) {
+    const ids = { nu:'adj-nu', revolut:'adj-rev', openbank:'adj-ob', gbm:'adj-gbm' };
+    const nuevoSaldo = parseFloat(document.getElementById(ids[cuenta]).value);
+    if (isNaN(nuevoSaldo) || nuevoSaldo < 0) { toast('Ingresa un saldo válido'); return; }
+    const actual = { nu: state.nu_saved, revolut: state.rev_saved||0, openbank: state.openbank_saved, gbm: state.gbm_saved }[cuenta];
+    const delta  = Math.round((nuevoSaldo - actual) * 100) / 100;
+    if (delta === 0) { toast('Sin cambios'); return; }
+    if      (cuenta === 'nu')       state.nu_saved       = nuevoSaldo;
+    else if (cuenta === 'revolut')  state.rev_saved       = nuevoSaldo;
+    else if (cuenta === 'openbank') state.openbank_saved  = nuevoSaldo;
+    else if (cuenta === 'gbm')      state.gbm_saved       = nuevoSaldo;
+    state.historial.push({ fecha: new Date().toISOString(), monto: Math.abs(delta), destino: cuenta, nota: delta > 0 ? 'Ajuste manual +' : 'Corrección manual -' });
+    saveState(state);
+    document.getElementById(ids[cuenta]).value = '';
+    renderAll();
+    const labels = { nu:'Nu', revolut:'Revolut', openbank:'Openbank', gbm:'GBM+' };
+    toast(`✅ ${labels[cuenta]} → ${fmt(nuevoSaldo)} (${delta > 0 ? '+' : ''}${fmt(delta)})`);
+}
+
+function eliminarMovimiento(idx) {
+    const h = state.historial[idx];
+    if (!h) return;
+    const labels = { nu:'Nu', revolut:'Revolut', openbank:'Openbank', gbm:'GBM+', uni:'Universidad' };
+    if (!confirm(`¿Eliminar: ${labels[h.destino]||h.destino} ${fmt(h.monto)}?\nEsto ajustará el saldo correspondiente.`)) return;
+    if      (h.destino === 'nu')       state.nu_saved       = Math.max(0, state.nu_saved - h.monto);
+    else if (h.destino === 'revolut')  state.rev_saved       = Math.max(0, (state.rev_saved||0) - h.monto);
+    else if (h.destino === 'openbank') state.openbank_saved  = Math.max(0, state.openbank_saved - h.monto);
+    else if (h.destino === 'gbm')      state.gbm_saved       = Math.max(0, state.gbm_saved - h.monto);
+    else if (h.destino === 'uni')      state.uni_saved       = Math.max(0, state.uni_saved - h.monto);
+    state.historial.splice(idx, 1);
+    saveState(state);
+    renderAll();
+    renderReporte();
+    toast('Movimiento eliminado · saldo ajustado');
+}
+
+function resetConfirm() {
+    if (confirm('¿Seguro que quieres borrar TODOS los datos? Esta acción es irreversible.')) {
+        localStorage.removeItem(DB_KEY);
+        localStorage.removeItem(DB_KEY_V1);
+        state = defaultState();
+        renderAll();
+        toast('Datos eliminados.');
+    }
+}
+
+// ══════════════════════════════════════════════════════════
+//  DISTRIBUCIÓN INTELIGENTE ENTRE CUENTAS
+// ══════════════════════════════════════════════════════════
+function distribuirEnCuentasMazda(monto, nota) {
+    // Orden: Nu (13%,$25k) → Revolut (15%,$25k) → Openbank (13%, sin tope)
+    let restante = monto;
+    const now    = new Date().toISOString();
+    let paraNu = 0, paraRev = 0, paraOB = 0;
+
+    const espacioNu = Math.max(0, NU_LIMIT - state.nu_saved);
+    paraNu = Math.min(restante, espacioNu);
+    if (paraNu > 0) {
+        state.nu_saved += paraNu;
+        state.historial.push({ fecha: now, monto: paraNu, destino: 'nu', nota: nota || 'Auto' });
+        restante -= paraNu;
+    }
+
+    if (restante > 0) {
+        const espacioRev = Math.max(0, REV_LIMIT - (state.rev_saved || 0));
+        paraRev = Math.min(restante, espacioRev);
+        if (paraRev > 0) {
+            state.rev_saved = (state.rev_saved || 0) + paraRev;
+            state.historial.push({ fecha: now, monto: paraRev, destino: 'revolut', nota: nota || 'Auto' });
+            restante -= paraRev;
+        }
+    }
+
+    if (restante > 0) {
+        paraOB = restante;
+        state.openbank_saved += paraOB;
+        state.historial.push({ fecha: now, monto: paraOB, destino: 'openbank', nota: nota || 'Auto' });
+    }
+
+    return { paraNu, paraRev, paraOB };
+}
+
+// ══════════════════════════════════════════════════════════
+//  RITMO IDEAL
+// ══════════════════════════════════════════════════════════
+function calcRitmoIdeal() {
+    const now       = new Date();
+    const planStart = new Date(2026, 4, 1); // 1 Mayo 2026
+    const meses     = Math.max(0,
+        (now.getFullYear() - planStart.getFullYear()) * 12 +
+        (now.getMonth()    - planStart.getMonth())
+    );
+    if (meses === 0) return { ideal: 0, actual: mazdaTotal(), delta: 0, meses: 0 };
+
+    let nu = 0, rev = 0, ob = 0, gbm = 0;
+    for (let i = 0; i < meses; i++) {
+        nu  *= (1 + TASA_NU       / 12);
+        rev *= (1 + TASA_REV      / 12);
+        ob  *= (1 + TASA_OPENBANK / 12);
+        gbm *= (1 + TASA_GBM      / 12);
+        let r = 10000;
+        const aNu  = Math.min(r, Math.max(0, NU_LIMIT  - nu));  nu  += aNu;  r -= aNu;
+        const aRev = Math.min(r, Math.max(0, REV_LIMIT - rev)); rev += aRev; r -= aRev;
+        ob += r;
+        const mDate = new Date(2026, 4 + i, 1);
+        if (mDate.getMonth() === 11) gbm += 16000;
+    }
+    const ideal  = Math.round(nu + rev + ob + gbm);
+    const actual = mazdaTotal();
+    return { ideal, actual, delta: actual - ideal, meses };
+}
+
+// ══════════════════════════════════════════════════════════
+//  DASHBOARD
+// ══════════════════════════════════════════════════════════
+function renderDashboard() {
+    const now = new Date();
+    document.getElementById('header-date').textContent =
+        now.toLocaleDateString('es-MX', { day:'numeric', month:'short', year:'numeric' });
+
+    const meses     = calcMesesRestantes();
+    const mazda     = mazdaTotal();
+    const total     = mazda + state.uni_saved;
+    const pctMazda  = Math.min(100, (mazda / META_MAZDA) * 100);
+    const pctUni    = Math.min(100, (state.uni_saved / META_UNI) * 100);
+    const rendMes   = interesTotal();
+
+    document.getElementById('stat-meses').textContent      = meses;
+    document.getElementById('stat-patrimonio').textContent = fmt(total);
+    document.getElementById('stat-rend-mes').textContent   = fmt(rendMes);
+    document.getElementById('stat-uni-saved').textContent  = fmt(state.uni_saved);
+
+    document.getElementById('bar-mazda').style.width   = pctMazda + '%';
+    document.getElementById('bar-uni').style.width     = pctUni + '%';
+    document.getElementById('pct-mazda').textContent   = pctMazda.toFixed(1) + '%';
+    document.getElementById('pct-uni').textContent     = pctUni.toFixed(1) + '%';
+    document.getElementById('saved-mazda-lbl').textContent = 'Ahorrado: ' + fmt(mazda);
+    document.getElementById('saved-uni-lbl').textContent   = 'Ahorrado: ' + fmt(state.uni_saved);
+    document.getElementById('mazda-breakdown').textContent =
+        `Nu ${fmt(state.nu_saved)} · Rev ${fmt(state.rev_saved||0)} · OB ${fmt(state.openbank_saved)} · GBM ${fmt(state.gbm_saved)}`;
+
+    document.getElementById('chip-nu').textContent  = fmt(state.nu_saved);
+    document.getElementById('chip-rev').textContent = fmt(state.rev_saved || 0);
+    document.getElementById('chip-ob').textContent  = fmt(state.openbank_saved);
+    document.getElementById('chip-gbm').textContent = fmt(state.gbm_saved);
+
+    // Alert
+    const falta = META_MAZDA - mazda;
+    const alertEl = document.getElementById('alert-banner');
+    if (mazda === 0 && state.uni_saved === 0) {
+        alertEl.innerHTML = `<div class="alert warn">⚡ <strong>Primer paso HOY:</strong> Abre Nu o Revolut y deposita $7,500 de tu próxima quincena. Sin inicio en Mayo, la meta de Dic se vuelve imposible.</div>`;
+    } else if (pctMazda >= 100) {
+        alertEl.innerHTML = `<div class="alert good">🎉 <strong>¡Enganche completo!</strong> Tienes ${fmt(mazda)} listos. ¡Es hora de ir al distribuidor Mazda!</div>`;
+    } else if (meses > 0 && falta / meses > 15000) {
+        alertEl.innerHTML = `<div class="alert warn">⚠️ Necesitas ${fmt(falta/meses)}/mes para llegar a tiempo. Considera ingresos extra o reducir gastos.</div>`;
+    } else if (rendMes > 0) {
+        alertEl.innerHTML = `<div class="alert good">💹 Tu cartera genera <strong>${fmt(rendMes)}/mes</strong> en intereses pasivos. Ese dinero cubre el Seguro y Placas (~$25k).</div>`;
+    }
+
+    // Indicador de ritmo
+    const ritmo   = calcRitmoIdeal();
+    const ritmoEl = document.getElementById('ritmo-indicator');
+    if (ritmoEl && ritmo.meses > 0) {
+        const adelante = ritmo.delta >= 0;
+        const pctDelta = ritmo.ideal > 0 ? Math.abs(ritmo.delta / ritmo.ideal * 100).toFixed(1) : '0.0';
+        ritmoEl.innerHTML = `
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                    <span style="font-size:0.73rem;color:var(--muted);font-weight:600;">Ritmo vs plan ideal</span>
+                    <span style="font-size:0.8rem;font-weight:800;color:${adelante?'var(--green)':'#e53e3e'}">
+                        ${adelante ? '▲' : '▼'} ${adelante ? '+' : '-'}${fmt(Math.abs(ritmo.delta))} (${pctDelta}%)
+                    </span>
+                </div>
+                <div style="font-size:0.7rem;color:var(--muted);display:flex;justify-content:space-between;">
+                    <span>Plan ideal: ${fmt(ritmo.ideal)}</span>
+                    <span>Real: ${fmt(ritmo.actual)}</span>
+                </div>
+            </div>`;
+    } else if (ritmoEl) {
+        ritmoEl.innerHTML = '';
+    }
+}
+
+function registrarAporte() {
+    const monto   = parseFloat(document.getElementById('aporte-monto').value);
+    const destino = document.getElementById('aporte-destino').value;
+    if (!monto || monto <= 0) { toast('Ingresa un monto válido'); return; }
+
+    const now = new Date().toISOString();
+    if      (destino === 'nu')       state.nu_saved       += monto;
+    else if (destino === 'revolut')  state.rev_saved       = (state.rev_saved||0) + monto;
+    else if (destino === 'openbank') state.openbank_saved += monto;
+    else if (destino === 'gbm')      state.gbm_saved      += monto;
+    else                             state.uni_saved       += monto;
+
+    state.historial.push({ fecha: now, monto, destino });
+    saveState(state);
+    document.getElementById('aporte-monto').value = '';
+    renderAll();
+    const labels = { nu:'Nu', revolut:'Revolut', openbank:'Openbank', gbm:'GBM+', uni:'Universidad' };
+    toast(`✅ +${fmt(monto)} a ${labels[destino]}`);
+}
+
+// ══════════════════════════════════════════════════════════
+//  CUENTAS
+// ══════════════════════════════════════════════════════════
+function renderCuentas() {
+    // Nu (13%, tope $25k)
+    const nuPct = Math.min(100, (state.nu_saved / NU_LIMIT) * 100);
+    document.getElementById('nu-balance').textContent   = fmt(state.nu_saved);
+    document.getElementById('nu-rend-chip').textContent = `Rend mensual: ${fmt(state.nu_saved * TASA_NU / 12)}`;
+    document.getElementById('bar-nu').style.width       = nuPct + '%';
+    document.getElementById('nu-limit-txt').textContent =
+        `${fmt(state.nu_saved)} de ${fmt(NU_LIMIT)} usados (${nuPct.toFixed(0)}%)`;
+
+    // Revolut (15%, tope $25k)
+    const rev = state.rev_saved || 0;
+    const revPct = Math.min(100, (rev / REV_LIMIT) * 100);
+    document.getElementById('rev-balance').textContent   = fmt(rev);
+    document.getElementById('rev-rend-chip').textContent = `Rend mensual: ${fmt(rev * TASA_REV / 12)}`;
+    document.getElementById('bar-rev').style.width       = revPct + '%';
+    document.getElementById('rev-limit-txt').textContent =
+        `${fmt(rev)} de ${fmt(REV_LIMIT)} usados (${revPct.toFixed(0)}%)`;
+
+    // Openbank
+    document.getElementById('ob-balance').textContent  = fmt(state.openbank_saved);
+    document.getElementById('ob-rend-chip').textContent = `Rend mensual: ${fmt(state.openbank_saved * TASA_OPENBANK / 12)}`;
+
+    // GBM
+    document.getElementById('gbm-balance').textContent  = fmt(state.gbm_saved);
+    document.getElementById('gbm-rend-chip').textContent = `Rend mensual: ${fmt(state.gbm_saved * TASA_GBM / 12)}`;
+    if (state.gbm_saved > 0) {
+        const meses = calcMesesRestantes();
+        const proy  = state.gbm_saved * Math.pow(1 + TASA_GBM / 12, meses);
+        document.getElementById('gbm-proyeccion').textContent =
+            `Proyección en julio 2027 (${meses} meses): ${fmt(proy)} (+${fmt(proy - state.gbm_saved)})`;
+    } else {
+        document.getElementById('gbm-proyeccion').textContent =
+            'Destinado para aguinaldo ($16k) y bonos. Proyecta crecer al 11% anual (S&P 500 hist.)';
+    }
+
+    // Finsus
+    const finsusCap = finsusCapital();
+    document.getElementById('finsus-total-balance').textContent = fmt(finsusCap);
+    document.getElementById('finsus-rend-chip').textContent = `Rend mensual: ${fmt(finsusCap * TASA_FINSUS / 12)}`;
+
+    const now = new Date();
+    const list = document.getElementById('finsus-list');
+    if (state.finsus.length === 0) {
+        list.innerHTML = '<p style="font-size:0.85rem;color:var(--muted);">Sin inversiones aún. Registra la primera hoy.</p>';
+    } else {
+        list.innerHTML = state.finsus.map((inv, i) => {
+            const inicio = new Date(inv.inicio);
+            const vence  = new Date(inicio); vence.setDate(vence.getDate() + 360);
+            const rend   = Math.round(inv.monto * TASA_FINSUS / 12);
+            const dias   = Math.max(0, Math.round((vence - now) / 86400000));
+            const vencida = now >= vence;
+            return `<div class="inv-item">
+                <div>
+                    <div class="ii-name">Inv. ${i+1} · ${inv.mes}</div>
+                    <div class="ii-date">Vence: ${vence.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})}</div>
+                </div>
+                <div style="text-align:right;">
+                    <div class="ii-rend">${fmt(rend)}/mes</div>
+                    <div class="ii-status">${vencida ? '✅ Vencida' : dias + ' días'}</div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+}
+
+function depositarCuenta(cuenta) {
+    const inputId = { nu:'nu-deposit', revolut:'rev-deposit', openbank:'ob-deposit', gbm:'gbm-deposit' }[cuenta];
+    const monto   = parseFloat(document.getElementById(inputId).value);
+    if (!monto || monto <= 0) { toast('Ingresa un monto válido'); return; }
+
+    if      (cuenta === 'nu')       state.nu_saved       += monto;
+    else if (cuenta === 'revolut')  state.rev_saved       = (state.rev_saved||0) + monto;
+    else if (cuenta === 'openbank') state.openbank_saved += monto;
+    else                            state.gbm_saved      += monto;
+
+    state.historial.push({ fecha: new Date().toISOString(), monto, destino: cuenta });
+    saveState(state);
+    document.getElementById(inputId).value = '';
+    renderAll();
+    const labels = { nu:'Nu', revolut:'Revolut', openbank:'Openbank', gbm:'GBM+' };
+    toast(`✅ +${fmt(monto)} en ${labels[cuenta]}`);
+}
+
+function agregarFinsus() {
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const now   = new Date();
+    const mesKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+    if (state.finsus.find(f => f.inicio.startsWith(mesKey))) {
+        toast('Ya registraste una inversión este mes.'); return;
+    }
+    const mesLabel = meses[now.getMonth()] + ' ' + now.getFullYear();
+    state.finsus.push({ mes: mesLabel, inicio: now.toISOString().split('T')[0], monto: 5000 });
+    state.uni_saved += 5000;
+    state.historial.push({ fecha: now.toISOString(), monto: 5000, destino: 'uni', nota: 'Finsus apertura' });
+    saveState(state);
+    renderAll();
+    toast(`✅ Inversión Finsus $5,000 registrada · ${mesLabel}`);
+}
+
+// ══════════════════════════════════════════════════════════
+//  CHECKLIST
+// ══════════════════════════════════════════════════════════
+const MESES_2026 = [
+    { key:'2026-05', label:'Mayo 2026',   aguinaldo: false },
+    { key:'2026-06', label:'Junio 2026',  aguinaldo: false },
+    { key:'2026-07', label:'Julio 2026',  aguinaldo: false },
+    { key:'2026-08', label:'Agosto 2026', aguinaldo: false },
+    { key:'2026-09', label:'Sept 2026',   aguinaldo: false },
+    { key:'2026-10', label:'Oct 2026',    aguinaldo: false },
+    { key:'2026-11', label:'Nov 2026',    aguinaldo: false },
+    { key:'2026-12', label:'Dic 2026',    aguinaldo: true  },
+];
+const MESES_2027 = [
+    { key:'2027-01', label:'Ene 2027', aguinaldo: false },
+    { key:'2027-02', label:'Feb 2027', aguinaldo: false },
+    { key:'2027-03', label:'Mar 2027', aguinaldo: false },
+    { key:'2027-04', label:'Abr 2027', aguinaldo: false },
+    { key:'2027-05', label:'May 2027', aguinaldo: false },
+    { key:'2027-06', label:'Jun 2027 — Último mes', aguinaldo: false },
+];
+
+function renderChecklist() {
+    renderChecklistGroup('checklist-2026', MESES_2026);
+    renderChecklistGroup('checklist-2027', MESES_2027);
+
+    let total = 0, done = 0;
+    [...MESES_2026, ...MESES_2027].forEach(m => {
+        total += 2 + (m.aguinaldo ? 1 : 0);
+        if (state.checklist[m.key+'-uni'])       done++;
+        if (state.checklist[m.key+'-mazda'])     done++;
+        if (m.aguinaldo && state.checklist[m.key+'-gbm']) done++;
+    });
+    const pct = Math.round((done/total)*100);
+    document.getElementById('checklist-stats').innerHTML = `
+        <div style="display:flex;justify-content:space-between;font-size:0.88rem;margin-bottom:6px;">
+            <span>${done} de ${total} depósitos marcados</span>
+            <span style="font-weight:700;color:var(--red);">${pct}%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>`;
+}
+
+function renderChecklistGroup(containerId, meses) {
+    const now = new Date();
+    const currentKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+
+    document.getElementById(containerId).innerHTML = meses.map(m => {
+        const uniDone   = !!state.checklist[m.key+'-uni'];
+        const mazdaDone = !!state.checklist[m.key+'-mazda'];
+        const gbmDone   = !!state.checklist[m.key+'-gbm'];
+        const isCurrent = m.key === currentKey;
+        const hl = isCurrent ? 'background:var(--red-faint);border-radius:8px;padding:11px 8px;' : '';
+
+        return `<div class="check-row" style="${hl}">
+            <div class="month">
+                ${isCurrent ? '📍 ' : ''}${m.label}
+                ${isCurrent ? '<small style="color:var(--red);font-weight:600;">← Mes actual</small>' : ''}
+                ${m.aguinaldo ? `<small style="color:var(--gbm);">+ Aguinaldo ${fmt(state.config.aguinaldo||16000)} → GBM+</small>` : ''}
+            </div>
+            <div class="chk-group">
+                <div class="chk-label" onclick="toggleCheck('${m.key+'-uni'}')">
+                    <div class="chk-box ${uniDone?'c-green':''}">${uniDone?svgCheck():''}</div>
+                    <span>Uni $5k</span>
+                </div>
+                <div class="chk-label" onclick="toggleCheck('${m.key+'-mazda'}')">
+                    <div class="chk-box ${mazdaDone?'c-red':''}">${mazdaDone?svgCheck():''}</div>
+                    <span>Mazda $10k</span>
+                </div>
+                ${m.aguinaldo ? `
+                <div class="chk-label" onclick="toggleCheck('${m.key+'-gbm'}')">
+                    <div class="chk-box ${gbmDone?'c-gbm':''}">${gbmDone?svgCheck():''}</div>
+                    <span>GBM ${fmt(state.config.aguinaldo||16000)}</span>
+                </div>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function toggleCheck(key) {
+    const isUni   = key.includes('-uni');
+    const isMazda = key.includes('-mazda');
+    const isGbm   = key.includes('-gbm');
+    const wasDone = !!state.checklist[key];
+
+    state.checklist[key] = !wasDone;
+
+    if (!wasDone) {
+        if (isUni) {
+            state.uni_saved += 5000;
+            state.historial.push({ fecha: new Date().toISOString(), monto: 5000, destino:'uni', nota:'Checklist' });
+            toast(`✅ +$5,000 → Finsus Universidad`);
+        } else if (isMazda) {
+            const dist = distribuirEnCuentasMazda(10000, 'Checklist');
+            let msg = '✅ +$10k:';
+            if (dist.paraNu   > 0) msg += ` Nu ${fmt(dist.paraNu)}`;
+            if (dist.paraRev  > 0) msg += ` · Rev ${fmt(dist.paraRev)}`;
+            if (dist.paraOB   > 0) msg += ` · OB ${fmt(dist.paraOB)}`;
+            toast(msg);
+        } else if (isGbm) {
+            const agui = state.config.aguinaldo || 16000;
+            state.gbm_saved += agui;
+            state.historial.push({ fecha: new Date().toISOString(), monto: agui, destino:'gbm', nota:'Aguinaldo' });
+            toast(`✅ +${fmt(agui)} → GBM+ (Aguinaldo)`);
+        }
+    } else {
+        if (isUni) {
+            state.uni_saved = Math.max(0, state.uni_saved - 5000);
+            toast('↩️ $5,000 revertido de Universidad');
+        } else if (isMazda) {
+            // Revertir en orden inverso: OB → Rev → Nu
+            let r = 10000;
+            const delOB  = Math.min(r, state.openbank_saved);
+            state.openbank_saved = Math.max(0, state.openbank_saved - delOB); r -= delOB;
+            const delRev = Math.min(r, state.rev_saved || 0);
+            state.rev_saved = Math.max(0, (state.rev_saved || 0) - delRev); r -= delRev;
+            state.nu_saved = Math.max(0, state.nu_saved - r);
+            toast('↩️ $10,000 revertido del fondo Mazda');
+        } else if (isGbm) {
+            const agui = state.config.aguinaldo || 16000;
+            state.gbm_saved = Math.max(0, state.gbm_saved - agui);
+            toast(`↩️ ${fmt(agui)} revertido de GBM+`);
+        }
+    }
+
+    saveState(state);
+    renderAll();
+}
+
+// ══════════════════════════════════════════════════════════
+//  SIMULADOR CON INTERÉS COMPUESTO
+// ══════════════════════════════════════════════════════════
+let _simTimer = null;
+function simDebounce() { clearTimeout(_simTimer); _simTimer = setTimeout(simular, 300); }
+
+function simular() {
+    const ahorroMazda = parseFloat(document.getElementById('sim-mazda').value)     || 10000;
+    const ahorroUni   = parseFloat(document.getElementById('sim-uni').value)       || 5000;
+    const aguinaldo   = parseFloat(document.getElementById('sim-aguinaldo').value) || 16000;
+    const inicial     = parseFloat(document.getElementById('sim-inicial').value)   || 0;
+    const compound    = document.getElementById('sim-compound').checked;
+
+    // Fechas dinámicas — siempre desde hoy hasta Jul 2027
+    const now        = new Date();
+    const simTarget  = new Date(2027, 6, 1);
+    const startYear  = now.getFullYear();
+    const startMonth = now.getMonth();
+    const TOTAL_MESES = Math.max(1,
+        (simTarget.getFullYear() - startYear) * 12 + (simTarget.getMonth() - startMonth)
+    );
+
+    // Distribución inicial en cuentas (orden: Nu $25k → Revolut $25k → Openbank)
+    // Proyecta desde $0 — no depende del saldo actual
+    let nuI  = Math.min(inicial, NU_LIMIT);
+    let revI = Math.min(Math.max(0, inicial - NU_LIMIT), REV_LIMIT);
+    let obI  = Math.max(0, inicial - NU_LIMIT - REV_LIMIT);
+
+    let nu  = nuI;
+    let rev = revI;
+    let ob  = obI;
+    let gbm = 0;
+
+    const resultados = [];
+
+    for (let i = 0; i < TOTAL_MESES; i++) {
+        const mDate    = new Date(startYear, startMonth + i, 1);
+        const isDic    = mDate.getMonth() === 11;
+        const contrib  = ahorroMazda;
+        const espacio  = Math.max(0, NU_LIMIT - nu);
+        const paraNu   = Math.min(contrib, espacio);
+        const paraOB   = contrib - paraNu;
+
+        if (compound) {
+            nu  *= (1 + TASA_NU       / 12);
+            rev *= (1 + TASA_REV      / 12);
+            ob  *= (1 + TASA_OPENBANK / 12);
+            gbm *= (1 + TASA_GBM      / 12);
+        }
+
+        // Distribuir mensual: Nu → Revolut → Openbank
+        let contribRest = contrib;
+        const espNu  = Math.max(0, NU_LIMIT  - nu);
+        const addNu  = Math.min(contribRest, espNu); nu += addNu; contribRest -= addNu;
+        const espRev = Math.max(0, REV_LIMIT - rev);
+        const addRev = Math.min(contribRest, espRev); rev += addRev; contribRest -= addRev;
+        ob += contribRest;
+        if (isDic) gbm += aguinaldo;
+
+        const total = nu + rev + ob + gbm;
+        resultados.push({
+            key:   mDate.getFullYear() + '-' + String(mDate.getMonth()+1).padStart(2,'0'),
+            label: mDate.toLocaleDateString('es-MX',{month:'short',year:'2-digit'}),
+            nu: Math.round(nu), rev: Math.round(rev), ob: Math.round(ob), gbm: Math.round(gbm),
+            total: Math.round(total),
+            isDic
+        });
+    }
+
+    const ultimo     = resultados[resultados.length - 1];
+    const totalMazda = ultimo.total;
+    const totalUni   = ahorroUni * TOTAL_MESES;
+    const alcanza    = totalMazda >= META_MAZDA;
+    const rendProyec = state.finsus.length > 0
+        ? state.finsus.length * Math.round(5000 * TASA_FINSUS / 12) * 8
+        : Math.round(5000 * TASA_FINSUS / 12) * 8 * 4;
+
+    document.getElementById('sim-result').innerHTML = `
+        <div class="sim-result">
+            <div class="sr-row"><span>Nu en julio 2027</span><span class="sr-val">${fmt(ultimo.nu)}</span></div>
+            <div class="sr-row"><span>Revolut en julio 2027</span><span class="sr-val">${fmt(ultimo.rev)}</span></div>
+            <div class="sr-row"><span>Openbank en julio 2027</span><span class="sr-val">${fmt(ultimo.ob)}</span></div>
+            <div class="sr-row"><span>GBM+ en julio 2027</span><span class="sr-val">${fmt(ultimo.gbm)}</span></div>
+            <div class="sr-row"><span>Total fondo Mazda</span><span class="sr-val">${fmt(totalMazda)}</span></div>
+            <div class="sr-row"><span>Meta enganche</span><span class="sr-val">$141,570</span></div>
+            <div class="sr-row"><span>${alcanza?'✅ Superávit':'⚠️ Faltante'}</span>
+                <span class="sr-val" style="color:${alcanza?'var(--green)':'red'}">
+                ${alcanza ? '+'+fmt(totalMazda-META_MAZDA) : '-'+fmt(META_MAZDA-totalMazda)}</span></div>
+            <div class="sr-row"><span>Fondo Uni proyectado</span><span class="sr-val">${fmt(totalUni)}</span></div>
+            <div class="sr-row"><span>Rend Finsus est. (para seguro)</span><span class="sr-val">${fmt(rendProyec)}</span></div>
+        </div>
+        <div class="alert ${alcanza?'good':'warn'}" style="margin-top:12px;">
+            ${alcanza
+                ? `🎉 Con interés ${compound?'compuesto':'simple'}, <strong>sí alcanzas</strong> el enganche. Superávit de ${fmt(totalMazda-META_MAZDA)}.`
+                : `⚠️ Faltan ${fmt(META_MAZDA-totalMazda)}. Aumenta tu ahorro mensual o agrega ingresos extra.`}
+        </div>`;
+
+    renderTimeline(resultados);
+}
+
+function renderTimeline(resultados) {
+    const now = new Date();
+    const currentKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+
+    document.getElementById('timeline-container').innerHTML = [
+        ...resultados,
+        { key:'2027-07', label:'Jul 2027 — META 🏁', total: META_MAZDA, isDic: false, isTarget: true }
+    ].map(m => {
+        const pct = Math.min(100, ((m.total||META_MAZDA) / META_MAZDA) * 100).toFixed(0);
+        const cls = m.key < currentKey ? 'done' : m.key === currentKey ? 'current' : '';
+        return `<div class="tl-item ${cls}">
+            <div class="tl-month">${m.label}</div>
+            <div class="tl-amount">Acum: ${fmt(m.total || META_MAZDA)} (${pct}%)</div>
+            ${m.isDic ? `<div class="tl-desc" style="color:var(--gbm);">+Aguinaldo → GBM+</div>` : ''}
+            ${m.isTarget ? `<div class="tl-desc" style="color:var(--green);font-weight:700;">¡ENGANCHE LISTO!</div>` : ''}
+        </div>`;
+    }).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+//  REPORTE DE ÉLITE
+// ══════════════════════════════════════════════════════════
+function calcScore() {
+    const mesesRest  = Math.max(1, calcMesesRestantes());
+    const mazda      = mazdaTotal();
+    const necesario  = (META_MAZDA - mazda) / mesesRest;
+    const ritmoScore = Math.min(40, Math.round((10000 / Math.max(necesario, 1)) * 40));
+    const pctMazda   = Math.min(100, (mazda / META_MAZDA) * 100);
+    const pctScore   = Math.min(30, Math.round((pctMazda / 100) * 30));
+    const totalChk   = ([...MESES_2026,...MESES_2027]).length * 2;
+    const doneChk    = Object.values(state.checklist).filter(Boolean).length;
+    const chkScore   = Math.min(15, Math.round((doneChk/totalChk)*15));
+    const finsusScore = Math.min(10, state.finsus.length * 2);
+    const gbmScore   = state.gbm_saved > 0 ? 5 : 0;
+    return Math.min(100, ritmoScore + pctScore + chkScore + finsusScore + gbmScore);
+}
+
+function renderReporte() {
+    const now      = new Date();
+    const mesesRest = calcMesesRestantes();
+    const mazda    = mazdaTotal();
+    const total    = mazda + state.uni_saved;
+    const pctMazda = Math.min(100, (mazda / META_MAZDA) * 100);
+    const rendMes  = interesTotal();
+
+    document.getElementById('rpt-fecha-gen').textContent =
+        'Generado el ' + now.toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    document.getElementById('rpt-kpi-total').textContent  = fmt(total);
+    document.getElementById('rpt-kpi-avance').textContent = pctMazda.toFixed(1)+'%';
+    document.getElementById('rpt-kpi-meses').textContent  = mesesRest;
+
+    // Score
+    const score = calcScore();
+    let scoreColor = '#cc3333', scoreLabel = 'En Riesgo',
+        scoreDesc  = 'El plan necesita intervención. Aumenta las aportaciones inmediatamente.';
+    if (score >= 80) { scoreColor='#1a7f4b'; scoreLabel='Plan Sólido';   scoreDesc='Disciplina excepcional. Julio 2027 es altamente alcanzable.'; }
+    else if (score >= 55) { scoreColor='#f59e0b'; scoreLabel='En Progreso'; scoreDesc='Buen avance. Mantén el ritmo y optimiza el uso de GBM+.'; }
+
+    document.getElementById('rpt-gauge-wrap').style.background =
+        `conic-gradient(${scoreColor} ${score*3.6}deg, #eee ${score*3.6}deg)`;
+    document.getElementById('rpt-score-num').textContent   = score;
+    document.getElementById('rpt-score-num').style.color   = scoreColor;
+    document.getElementById('rpt-score-label').textContent = scoreLabel;
+    document.getElementById('rpt-score-desc').textContent  = scoreDesc;
+
+    // Balance multicuenta
+    const nuRend  = Math.round(state.nu_saved * TASA_NU / 12);
+    const obRend  = Math.round(state.openbank_saved * TASA_OPENBANK / 12);
+    const gbmRend = Math.round(state.gbm_saved * TASA_GBM / 12);
+    const finRend = Math.round(finsusCapital() * TASA_FINSUS / 12);
+    document.getElementById('rpt-multicuenta-tbody').innerHTML = `
+        <tr><td class="td-nu">🔵 Nu/Revolut</td><td class="td-nu">${fmt(state.nu_saved)}</td><td>15%</td><td class="td-green">${fmt(nuRend)}</td></tr>
+        <tr><td class="td-ob">🟡 Openbank</td><td class="td-ob">${fmt(state.openbank_saved)}</td><td>13%</td><td class="td-green">${fmt(obRend)}</td></tr>
+        <tr><td class="td-gbm">🟣 GBM+</td><td class="td-gbm">${fmt(state.gbm_saved)}</td><td>~11%</td><td class="td-green">${fmt(gbmRend)}</td></tr>
+        <tr><td class="td-green">🟢 Finsus</td><td class="td-green">${fmt(finsusCapital())}</td><td>15%</td><td class="td-green">${fmt(finRend)}</td></tr>
+        <tr style="font-weight:700;background:#fafafa;">
+            <td>Total Cartera</td><td>${fmt(total)}</td><td>—</td><td style="color:var(--green);font-weight:700;">${fmt(rendMes)}/mes</td></tr>`;
+
+    // Estado de metas
+    const faltaMazda = Math.max(0, META_MAZDA - mazda);
+    const faltaUni   = Math.max(0, META_UNI - state.uni_saved);
+    document.getElementById('rpt-metas-tbody').innerHTML = `
+        <tr><td>🚗 Mazda Enganche</td><td class="td-red">${fmt(mazda)}</td><td class="td-muted">${fmt(faltaMazda)}</td><td class="td-red">${pctMazda.toFixed(1)}%</td></tr>
+        <tr><td>🎓 Universidad Año 2</td><td class="td-green">${fmt(state.uni_saved)}</td><td class="td-muted">${fmt(faltaUni)}</td><td class="td-green">${Math.min(100,(state.uni_saved/META_UNI)*100).toFixed(1)}%</td></tr>
+        <tr style="font-weight:700;background:#fafafa;"><td>Total</td><td>${fmt(total)}</td><td>${fmt(faltaMazda+faltaUni)}</td><td>—</td></tr>`;
+
+    // Mini chart
+    const MONTHS = ['2026-05','2026-06','2026-07','2026-08','2026-09','2026-10','2026-11','2026-12',
+                    '2027-01','2027-02','2027-03','2027-04','2027-05','2027-06'];
+    const LBLS   = ['M','J','J','A','S','O','N','D','E','F','M','A','M','J'];
+    const curKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+    let acum = 7500;
+    document.getElementById('rpt-mini-chart').innerHTML = MONTHS.map((k, i) => {
+        acum += 10000 + (k==='2026-12'?16000:0);
+        acum = Math.min(META_MAZDA, acum);
+        const h   = Math.round((acum/META_MAZDA)*60);
+        const cls = k < curKey ? 'past' : k === curKey ? 'curr' : 'future';
+        return `<div class="rpt-mini-bar-wrap">
+            <div class="rpt-mini-bar ${cls}" style="height:${h}px;"></div>
+            <div class="rpt-mini-lbl">${LBLS[i]}</div>
+        </div>`;
+    }).join('');
+
+    // Finsus vencimientos
+    if (state.finsus.length === 0) {
+        document.getElementById('rpt-finsus-tbody').innerHTML =
+            '<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:14px;">Sin inversiones Finsus aún</td></tr>';
+    } else {
+        document.getElementById('rpt-finsus-tbody').innerHTML = state.finsus.map((inv,i) => {
+            const inicio = new Date(inv.inicio);
+            const vence  = new Date(inicio); vence.setDate(vence.getDate()+360);
+            const rend   = Math.round(inv.monto * TASA_FINSUS / 12);
+            const vencida = now >= vence;
+            return `<tr>
+                <td class="td-muted">${i+1}</td>
+                <td>${inv.mes}</td>
+                <td>${vence.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'2-digit'})}</td>
+                <td class="td-green">${fmt(rend)}</td>
+                <td>${vencida?'<span style="color:var(--green);">✅ Vencida</span>':'⏳ Activa'}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Historial
+    const histEl = document.getElementById('rpt-historial');
+    if (!state.historial.length) {
+        histEl.innerHTML = '<p style="font-size:0.82rem;color:var(--muted);">Sin aportaciones manuales registradas aún.</p>';
+    } else {
+        const colors = { nu:'var(--nu)', revolut:'var(--rev)', openbank:'var(--ob)', gbm:'var(--gbm)', uni:'var(--green)' };
+        const labels = { nu:'Nu', revolut:'Revolut', openbank:'Openbank', gbm:'GBM+', uni:'Universidad' };
+        histEl.innerHTML = state.historial
+            .map((h, i) => ({ ...h, _idx: i }))
+            .reverse()
+            .map(h => {
+                const d = new Date(h.fecha);
+                const c = colors[h.destino] || 'var(--primary)';
+                return `<div class="rpt-hist-item">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <div class="hi-dot" style="background:${c}"></div>
+                        <div>
+                            <div style="font-size:0.82rem;">${labels[h.destino]||h.destino}${h.nota?` · <span style="color:var(--muted);font-size:0.7rem;">${h.nota}</span>`:''}</div>
+                            <div style="font-size:0.7rem;color:var(--muted);">${d.toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'})}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-weight:700;color:${c}">${fmt(h.monto)}</span>
+                        <button onclick="eliminarMovimiento(${h._idx})" style="background:none;border:1px solid #e2e8f0;cursor:pointer;color:#94a3b8;font-size:0.75rem;padding:2px 7px;border-radius:6px;line-height:1.4;font-weight:700;" title="Eliminar">✕</button>
+                    </div>
+                </div>`;
+            }).join('');
+    }
+
+    // Recomendaciones
+    const recs = [];
+    const necesario = (META_MAZDA - mazda) / Math.max(1, mesesRest);
+    if (mazda === 0 && state.uni_saved === 0)
+        recs.push({ cls:'r-warn', icon:'⚡', txt:'<strong>Acción inmediata:</strong> Inicia los fondos HOY. Transfiere $7,500 a Nu/Revolut.' });
+    if (necesario > 10000)
+        recs.push({ cls:'r-warn', icon:'⚠️', txt:`<strong>Ritmo insuficiente:</strong> Necesitas ${fmt(necesario)}/mes para la meta. Evalúa ingresos extra.` });
+    else if (mazda > 0)
+        recs.push({ cls:'r-green', icon:'✅', txt:`<strong>Ritmo correcto:</strong> Necesitas ${fmt(necesario)}/mes — estás por encima con $10,000/mes.` });
+    if (state.nu_saved < NU_LIMIT)
+        recs.push({ cls:'r-info', icon:'🔵', txt:`<strong>Prioridad Nu:</strong> Completa los ${fmt(NU_LIMIT-state.nu_saved)} restantes en Nu antes de usar Openbank (tasa 15% vs 13%).` });
+    if (state.gbm_saved === 0)
+        recs.push({ cls:'r-info', icon:'🟣', txt:'<strong>GBM+ pendiente:</strong> El aguinaldo ($16k) debe ir a GBM+. Al 11% anual proyecta ~$17,760 en julio 2027.' });
+    if (state.finsus.length === 0)
+        recs.push({ cls:'r-info', icon:'🟢', txt:'<strong>Abre tu primera Finsus:</strong> $5,000 a 360 días genera ~$62/mes en intereses. En 8 meses = ~$500 extra.' });
+    document.getElementById('rpt-recomendaciones').innerHTML = recs.map(r =>
+        `<div class="rpt-rec ${r.cls}"><span class="r-icon">${r.icon}</span><span>${r.txt}</span></div>`
+    ).join('');
+
+    // Checklist resumen
+    let doneCount = 0, totalCount = 0;
+    [...MESES_2026,...MESES_2027].forEach(m => {
+        totalCount += 2 + (m.aguinaldo ? 1 : 0);
+        if (state.checklist[m.key+'-uni'])   doneCount++;
+        if (state.checklist[m.key+'-mazda']) doneCount++;
+        if (m.aguinaldo && state.checklist[m.key+'-gbm']) doneCount++;
+    });
+    const chkPct = Math.round((doneCount/totalCount)*100);
+    document.getElementById('rpt-checklist-resumen').innerHTML = `
+        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:6px;">
+            <span>${doneCount} de ${totalCount} depósitos confirmados</span>
+            <span style="font-weight:700;color:var(--red);">${chkPct}%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${chkPct}%"></div></div>`;
+
+    // Distribución del sueldo — dinámica
+    const cfg = state.config;
+    const sueldo = cfg.sueldo || 32000;
+    const gastos = cfg.gastos || 17000;
+    const aMazda = cfg.ahorro_mazda || 10000;
+    const aUni   = cfg.ahorro_uni   || 5000;
+    const resto  = sueldo - gastos - aMazda - aUni;
+    const pct = v => ((v / sueldo) * 100).toFixed(1) + '%';
+    document.getElementById('rpt-dist-title').textContent = `Distribución Mensual del Sueldo (${fmt(sueldo)})`;
+    document.getElementById('rpt-dist-tbody').innerHTML = `
+        <tr><td>Gastos de vida</td><td class="td-muted">${fmt(gastos)}</td><td class="td-muted">—</td><td class="td-muted">${pct(gastos)}</td></tr>
+        <tr><td>Fondo Mazda</td><td class="td-red">${fmt(aMazda)}</td><td class="td-nu">Nu → Revolut → Openbank</td><td class="td-red">${pct(aMazda)}</td></tr>
+        <tr><td>Fondo Universidad</td><td class="td-green">${fmt(aUni)}</td><td class="td-green">Finsus</td><td class="td-green">${pct(aUni)}</td></tr>
+        ${resto !== 0 ? `<tr><td>${resto > 0 ? 'Excedente' : 'Déficit'}</td><td class="${resto > 0 ? 'td-green' : 'td-red'}">${fmt(Math.abs(resto))}</td><td class="td-muted">—</td><td class="${resto > 0 ? 'td-green' : 'td-red'}">${pct(Math.abs(resto))}</td></tr>` : ''}
+        <tr style="font-weight:700;"><td>Total</td><td>${fmt(sueldo)}</td><td>—</td><td>100%</td></tr>`;
+
+    // Conclusiones del Estratega
+    const conclusiones = generarConclusiones(score, mesesRest, mazda, rendMes, necesario);
+    document.getElementById('rpt-conclusiones-content').innerHTML =
+        conclusiones.map(c => `<div class="c-line">${c}</div>`).join('');
+
+    // Pronóstico
+    document.getElementById('rpt-pronostico').innerHTML = generarPronostico(mazda, mesesRest);
+
+    // Print footer
+    document.getElementById('rpt-print-footer').textContent =
+        `Plan Mazda CX-30 i Sport · Reporte generado el ${now.toLocaleDateString('es-MX')} · Datos privados — uso personal`;
+}
+
+function generarConclusiones(score, mesesRest, mazda, rendMes, necesario) {
+    const pct = Math.min(100, (mazda/META_MAZDA)*100).toFixed(1);
+    const lines = [];
+
+    if (score >= 80)
+        lines.push(`<strong>Estado general: EXCELENTE.</strong> El plan se ejecuta con disciplina de alto rendimiento. Con el ${pct}% del enganche acumulado y ${mesesRest} meses restantes, la meta de julio 2027 es <strong style="color:#4ade80;">altamente alcanzable</strong>.`);
+    else if (score >= 55)
+        lines.push(`<strong>Estado general: EN PROGRESO.</strong> El avance del ${pct}% refleja un inicio sólido. Se proyecta alcanzar la meta si se mantiene el ritmo de $10,000/mes en los meses restantes.`);
+    else
+        lines.push(`<strong>Estado general: REQUIERE ACCIÓN.</strong> Con ${pct}% de avance y ${mesesRest} meses disponibles, el plan necesita corrección inmediata. Necesitas ${fmt(necesario)}/mes — $${(necesario-10000).toLocaleString()} por encima del ritmo actual.`);
+
+    if (rendMes > 0)
+        lines.push(`<strong>Rendimientos pasivos:</strong> La cartera genera <strong style="color:#4ade80;">${fmt(rendMes)}/mes</strong> en intereses (${fmt(rendMes*12)}/año). Estos rendimientos cubren los gastos de Seguro y Placas (~$25,000) sin tocar el capital del enganche.`);
+
+    if (state.nu_saved < NU_LIMIT)
+        lines.push(`<strong>Estrategia Nu/Revolut:</strong> Quedan ${fmt(NU_LIMIT-state.nu_saved)} por completar en Nu al 15% anual. Es prioritario llenar este espacio antes de dirigir capital a Openbank (13%), lo que maximiza el rendimiento neto de la cartera.`);
+    else
+        lines.push(`<strong>Estrategia Nu/Revolut:</strong> Límite óptimo alcanzado ($50,000 al 15%). El capital excedente fluye correctamente hacia Openbank al 13% anual.`);
+
+    if (state.gbm_saved > 0) {
+        const proy = state.gbm_saved * Math.pow(1 + TASA_GBM, mesesRest/12);
+        lines.push(`<strong>GBM+ (Acelerador):</strong> Con ${fmt(state.gbm_saved)} invertidos al 11% anual (S&P 500 histórico), la proyección para julio 2027 es <strong style="color:#c084fc;">${fmt(proy)}</strong>. Una ganancia de ${fmt(proy-state.gbm_saved)} sobre el capital.`);
+    } else {
+        lines.push(`<strong>GBM+ (Acelerador):</strong> Cuenta sin activar. El aguinaldo de diciembre ($16,000) debe depositarse aquí para capturar el crecimiento del S&P 500. Proyección estimada al 11%/año: ${fmt(16000*Math.pow(1+TASA_GBM,mesesRest/12))} en julio 2027.`);
+    }
+
+    if (state.finsus.length >= 4)
+        lines.push(`<strong>Cascada Finsus:</strong> Con ${state.finsus.length} inversiones activas, la estrategia de cascada está madura. Los rendimientos mensuales de Finsus cubrirán los gastos vehiculares recurrentes sin necesidad de capital adicional.`);
+
+    return lines;
+}
+
+function generarPronostico(mazda, mesesRest) {
+    const necesario = (META_MAZDA - mazda) / Math.max(1, mesesRest);
+    const ritmoActual = 10000;
+    const mesesNecesarios = mazda >= META_MAZDA ? 0 :
+        Math.ceil((META_MAZDA - mazda) / ritmoActual);
+
+    const fechaPronostico = new Date();
+    fechaPronostico.setMonth(fechaPronostico.getMonth() + mesesNecesarios);
+
+    const alcanzaEnMeta = necesario <= ritmoActual;
+    const colorStatus   = alcanzaEnMeta ? 'var(--green)' : '#cc3333';
+
+    return `
+        <div style="background:#fafafa;border-radius:10px;padding:14px;border:1px solid #eee;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-size:0.82rem;font-weight:600;">Fecha estimada de compra</span>
+                <span style="font-size:1rem;font-weight:800;color:${colorStatus};">
+                    ${alcanzaEnMeta ? 'Julio 2027 ✓' : fechaPronostico.toLocaleDateString('es-MX',{month:'long',year:'numeric'})}
+                </span>
+            </div>
+            <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">
+                Ritmo actual: ${fmt(ritmoActual)}/mes · Ritmo necesario: ${fmt(Math.ceil(necesario))}/mes<br>
+                Capital restante: ${fmt(Math.max(0,META_MAZDA-mazda))} ·
+                ${alcanzaEnMeta ? '✅ En tiempo para la meta de julio 2027.' : '⚠️ Se proyecta un retraso de ' + (mesesNecesarios-mesesRest) + ' meses sobre la meta.'}
+            </div>
+        </div>`;
+}
+
+function exportarReportePDF() {
+    renderReporte();
+    toast('Preparando PDF...', 1500);
+    setTimeout(() => window.print(), 600);
+}
+
+function compartirReporte() {
+    const pct   = Math.min(100, (mazdaTotal()/META_MAZDA)*100).toFixed(1);
+    const score = calcScore();
+    const texto = `📊 Plan Mazda CX-30 i Sport 2027
+━━━━━━━━━━━━━━━━━━━━━
+🔵 Nu/Revolut:  ${fmt(state.nu_saved)}
+🟡 Openbank:    ${fmt(state.openbank_saved)}
+🟣 GBM+:        ${fmt(state.gbm_saved)}
+🟢 Finsus/Uni:  ${fmt(state.uni_saved)}
+━━━━━━━━━━━━━━━━━━━━━
+🚗 Avance Mazda: ${pct}%
+💹 Rend mensual: ${fmt(interesTotal())}
+💪 Salud del plan: ${score}/100
+📅 Meta: Julio 2027
+━━━━━━━━━━━━━━━━━━━━━
+"La disciplina es el puente entre las metas y los logros."`;
+
+    if (navigator.share) {
+        navigator.share({ title:'Mi Plan Financiero Mazda', text: texto });
+    } else {
+        navigator.clipboard.writeText(texto).then(() => toast('✅ Resumen copiado al portapapeles'));
+    }
+}
+
+// ══════════════════════════════════════════════════════════
+//  RENDER ALL
+// ══════════════════════════════════════════════════════════
+function renderAll() {
+    renderDashboard();
+    renderChecklist();
+    renderCuentas();
+    renderTasasConfig();
+    // Sincroniza capital inicial con saldo real acumulado (solo si el usuario no lo editó manualmente)
+    const totalActual = (state.nu_saved || 0) + (state.rev_saved || 0) + (state.openbank_saved || 0) + (state.gbm_saved || 0);
+    const simInicialEl = document.getElementById('sim-inicial');
+    if (!simInicialEl._userEdited) simInicialEl.value = Math.round(totalActual);
+    simular();
+    // Reporte se renderiza solo al entrar al tab
+    document.querySelectorAll('.tab-btn.active svg *').forEach(el => el.setAttribute('fill','#1d4ed8'));
+}
+
+applyDark();
+renderAll();
+
+// ══════════════════════════════════════════════════════════
+//  SWIPE ENTRE TABS
+// ══════════════════════════════════════════════════════════
+const TAB_ORDER = ['dashboard','checklist','cuentas','sim','reporte'];
+let _swipeX = 0, _swipeY = 0;
+document.addEventListener('touchstart', e => {
+    _swipeX = e.touches[0].clientX;
+    _swipeY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _swipeX;
+    const dy = e.changedTouches[0].clientY - _swipeY;
+    if (Math.abs(dx) < 55 || Math.abs(dy) > Math.abs(dx) * 0.7) return;
+    const current = document.querySelector('.page.active')?.id.replace('page-','');
+    const idx = TAB_ORDER.indexOf(current);
+    const next = TAB_ORDER[idx + (dx < 0 ? 1 : -1)];
+    if (!next) return;
+    const btn = document.querySelector(`.tab-btn[onclick*="'${next}'"]`);
+    if (btn) showTab(next, btn);
+}, { passive: true });
+</script>
+</body>
+</html>
